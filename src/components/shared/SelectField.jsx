@@ -2,7 +2,8 @@ import {Label, ListBox, Select} from "@heroui/react";
 
 export function SelectField({label, options, name}) {
   return (
-    <Select 
+    <Select
+      isRequired
       className='w-full'
       name={name} 
       placeholder="Select one"

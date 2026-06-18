@@ -1,80 +1,54 @@
 'use client';
 
 import Link from "next/link";
-import {Button, Description, FieldError, Form, Input, Label, Separator, TextField} from "@heroui/react";
-import { SelectField } from "@/components/shared/SelectField";
+import {Button, Description, FieldError, Form, Input, Label, Separator, TextField, toast} from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 
-const SignUpPage = () => {
+const LoginPage = () => {
+  const router = useRouter();
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const signUpData = Object.fromEntries(formData.entries());
+    const loginData = Object.fromEntries(formData.entries());
 
-    if (!signUpData.role) signUpData.role = 'Tenant';
-
-    const { data, error } = await authClient.signUp.email({
-      name: signUpData.name,
-      email: signUpData.email,
-      image: signUpData.image,
-      password: signUpData.password,
-      role: signUpData.role
-    }, {
-      onSuccess: () => {
-        console.log('success')
-      },
-      onError: (ctx) => {
-        console.log(ctx.error.message);
-      }
+    const { data, error } = await authClient.signIn.email({
+      email: loginData.email,
+      password: loginData.password,
     });
-  }
 
+    if (data) {
+      toast.success('Login Successful');
+      router.push('/');
+    } else {
+      toast.danger(error.message);
+    }
+  }
+  
   return (
-    <div 
+    <div
       className="flex flex-col gap-10 items-center justify-center min-h-screen p-5"
     >
 
       <header className="text-center">
-        <h2 className='font-bold text-2xl md:text-3xl'>Create your account</h2>
-
-        <p>
-          Join QuickRent to explore, book, and manage rental properties with ease.
-        </p>
+        <h2 className='font-bold text-2xl md:text-3xl'>
+          Welcome Back to QuickRent
+        </h2>
 
         <div className="flex gap-2 justify-center text-sm">
           <p className="text-muted">Already have an account?</p>
-          <Link className="hover:underline font-medium" href='/auth/signin'>
-            Sign in to continue.
+          <Link className="hover:underline font-medium" href='/signup'>
+            Sign up to continue.
           </Link>
         </div>
       </header>
-      
+
 
       <section className="border p-6 rounded-2xl max-w-xl mx-auto w-full">
-        <Form 
-          className="flex flex-col gap-4 w-full" 
-          onSubmit={handleOnSubmit}
-        >
-          <TextField
-            isRequired
-            name="name"
-            validate={(value) => {
-              if (value.length < 3) {
-                return "Name must be at least 3 characters";
-              }
-              return null;
-            }}
-          >
-            <Label>Name</Label>
-            <Input
-              className="focus:ring-0" 
-              placeholder="John Doe" 
-            />
-            <FieldError />
-          </TextField>
-
+        <Form className="flex w-full flex-col gap-4" onSubmit={handleOnSubmit}>
           <TextField
             isRequired
             name="email"
@@ -87,24 +61,12 @@ const SignUpPage = () => {
             }}
           >
             <Label>Email</Label>
-            <Input 
-              className="focus:ring-0"
+            <Input
+              className='focus:ring-0'  
               placeholder="john@example.com" 
             />
             <FieldError />
           </TextField>
-          
-          <TextField
-            isRequired
-            name="image"
-          >
-            <Label>Image Url</Label>
-            <Input
-              className="focus:ring-0" 
-              placeholder="https://example.com/image.jpg" 
-            />
-          </TextField>
-
           <TextField
             isRequired
             minLength={8}
@@ -124,32 +86,26 @@ const SignUpPage = () => {
             }}
           >
             <Label>Password</Label>
-            <Input
-              className="focus:ring-0" 
+            <Input 
+              className='focus:ring-0' 
               placeholder="Enter your password" 
             />
             <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
             <FieldError />
           </TextField>
 
-          <SelectField
-            label={'Sign up as'}
-            name={'role'}
-            options={['Tenant', 'Owner']}
-          />
-
           <div className="flex gap-2">
             <Button
-              className='bg-orange-400 w-full' 
+              className='bg-orange-500 w-full' 
               type="submit"
             >
-              Create Account
+              Submit
             </Button>
           </div>
         </Form>
 
         <Separator className="my-4" />
-
+        
         <div className="flex justify-center">
           <Button variant="tertiary">
             <FcGoogle />
@@ -157,8 +113,9 @@ const SignUpPage = () => {
           </Button>
         </div>
       </section>
+      
     </div>
   );
 };
 
-export default SignUpPage;
+export default LoginPage;
