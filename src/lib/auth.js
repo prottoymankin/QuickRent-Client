@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
 const client = new MongoClient(process.env.MONGODB_URI);
-const db = client.db('quick_rent_db');
+const db = client.db('quickrent_db');
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
@@ -12,5 +12,12 @@ export const auth = betterAuth({
   emailAndPassword: { 
     enabled: true,
     autoSignIn: false 
-  }, 
+  },
+  user: {
+    additionalFields: {
+      role: {
+        defaultValue: 'Tenant'
+      }
+    }
+  } 
 });
