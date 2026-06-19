@@ -1,7 +1,7 @@
 const AdminDashboardPage = () => {
   return (
     <div>
-      Hi i am admin
+      Hi I am admin
     </div>
   );
 };

@@ -1,7 +1,9 @@
+import React from 'react';
+
 const TenantDashboardPage = () => {
   return (
     <div>
-      Hi i am tenant
+      Hi i am Tenant
     </div>
   );
 };

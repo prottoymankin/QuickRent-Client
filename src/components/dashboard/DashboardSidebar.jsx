@@ -1,6 +1,7 @@
 import { getCurrentUser } from "@/lib/session";
 import {Bars, CirclePlus, ClockArrowRotateLeft, CreditCard, Heart, House, ListUl, Person, Persons, Ticket} from "@gravity-ui/icons";
 import {Button, Drawer} from "@heroui/react";
+import Link from "next/link";
 import { LiaBuildingSolid } from "react-icons/lia";
 
 export async function DashboardSidebar () {
@@ -25,6 +26,7 @@ export async function DashboardSidebar () {
     { icon: LiaBuildingSolid, href: '/dashboard/admin/all-properties', label: 'All Properties'},
     { icon: ListUl, href: '/dashboard/admin/all-boolings', label: 'All Bookings'},
     { icon: CreditCard, href: '/dashboard/admin/transactions', label: 'Transactions'},
+    { icon: Person, href: '/dashboard/admin/profile', label: 'Profile'},
   ];
 
   const userRole = {
@@ -38,14 +40,18 @@ export async function DashboardSidebar () {
   const navContent = (
     <nav className="flex flex-col gap-1">
       {navItems.map((item) => (
-        <button
+        <Link 
+          href={item.href}
           key={item.label}
-          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
-          type="button"
         >
-          <item.icon className="size-5 text-muted" />
-          {item.label}
-        </button>
+          <button
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default w-full"
+            type="button"
+          >
+            <item.icon className="size-5 text-muted" />
+            {item.label}
+          </button>
+        </Link>
       ))}
     </nav>
   );

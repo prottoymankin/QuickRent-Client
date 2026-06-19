@@ -1,7 +1,9 @@
+import React from 'react';
+
 const OwnerDashboardPage = () => {
   return (
     <div>
-      Hi i am owner
+      Hi I am owner
     </div>
   );
 };

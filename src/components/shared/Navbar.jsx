@@ -1,13 +1,10 @@
 'use client';
 
-import { useState } from "react";
 import { Link, Button, toast, Avatar, Dropdown, Label } from "@heroui/react";
 import { IoMdMenu } from "react-icons/io";
-import { RxCross1 } from "react-icons/rx";
-import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
+import { RiLogoutCircleLine } from "react-icons/ri";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { MdOutlineArrowOutward } from "react-icons/md";
 import { GoArrowUpRight } from "react-icons/go";
 
 const Navbar = () => {
@@ -15,6 +12,8 @@ const Navbar = () => {
 
   const { data } = authClient.useSession();
   const user = data?.user;
+
+  console.log(user);
   
   const handleLogout = async () => {
     await authClient.signOut({
@@ -26,6 +25,14 @@ const Navbar = () => {
       },
     });
   }
+
+  const dashboardRoutes  = {
+    'Tenant': '/dashboard/tenant',
+    'Owner': '/dashboard/owner',
+    'Admin': '/dashboard/admin',
+  }
+
+  const dashboardPath = dashboardRoutes[user?.role];
 
   return (
     <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
@@ -44,9 +51,13 @@ const Navbar = () => {
           <li>
             <Link href="/all-properties">All Properties</Link>
           </li>
-          <li>
-            <Link href='/dashboard'>Dashboard</Link>
-          </li>
+          {
+            user && (
+              <li>
+                <Link href={dashboardPath}>Dashboard</Link>
+              </li>
+            )
+          }
         </ul>
 
         
