@@ -1,7 +1,8 @@
 import { getCurrentUser } from "@/lib/session";
-import {Bars, CirclePlus, ClockArrowRotateLeft, CreditCard, Heart, House, ListUl, Person, Persons, Ticket} from "@gravity-ui/icons";
+import { CirclePlus, ClockArrowRotateLeft, CreditCard, Heart, House, ListUl, Person, Persons, Ticket} from "@gravity-ui/icons";
 import {Button, Drawer} from "@heroui/react";
 import Link from "next/link";
+import { GoSidebarCollapse } from "react-icons/go";
 import { LiaBuildingSolid } from "react-icons/lia";
 
 export async function DashboardSidebar () {
@@ -58,7 +59,7 @@ export async function DashboardSidebar () {
 
   return (
     <>
-      <aside className="border-r shrink-0 w-60 hidden md:block">
+      <aside className="border-r shrink-0 w-60 hidden md:block p-5">
         {navContent}
       </aside>
 
@@ -67,8 +68,9 @@ export async function DashboardSidebar () {
           <Button 
             isIconOnly
             variant="tertiary"
+            className='ml-5 mt-5'
           >
-            <Bars />
+            <GoSidebarCollapse />
           </Button>
           <Drawer.Backdrop>
             <Drawer.Content placement="left">

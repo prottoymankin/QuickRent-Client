@@ -5,7 +5,6 @@ const Banner = () => {
     "Apartment",
     "House",
     "Villa",
-    "Room",
     "Studio",
     "Office",
   ];
