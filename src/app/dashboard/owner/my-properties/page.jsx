@@ -1,3 +1,4 @@
+import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getOwenerProperties } from "@/lib/api/properties";
 import { getCurrentUser } from "@/lib/session";
 import { Pencil, TrashBin } from "@gravity-ui/icons";
@@ -9,15 +10,10 @@ const MyPropertyPage = async () => {
 
   return (
     <div className='space-y-10'>
-      <header>
-        <h2 className='font-bold text-3xl md:text-4xl'>
-          Manage Properties
-        </h2>
-
-        <p>
-          Keep track of your property listings and their approval status.
-        </p>
-      </header>
+      <PageHeader
+        title={'Manage Properties'}
+        subtitle={'Keep track of your property listings and their approval status.'}
+      />
 
       <Table>
         <Table.ScrollContainer>

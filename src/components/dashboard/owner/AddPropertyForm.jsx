@@ -1,13 +1,13 @@
 'use client';
 
-import { Button, Checkbox, CheckboxGroup, Form, Input, Label, TextArea, TextField, toast } from '@heroui/react';
+import { Button, Checkbox, Form, Input, Label, TextField, toast } from '@heroui/react';
 import React from 'react';
-import { SelectField } from '../shared/SelectField';
-import NumberField from '../shared/NumberField';
-import TextAreaField from '../shared/TextAreaField';
 import { Plus } from '@gravity-ui/icons';
-import { createProperty } from '@/lib/actions/properties';
 import { useRouter } from 'next/navigation';
+import { createProperty } from '@/lib/actions/properties';
+import { SelectField } from '@/components/shared/SelectField';
+import NumberField from '@/components/shared/NumberField';
+import TextAreaField from '@/components/shared/TextAreaField';
 
 const AddPropertyForm = ({ user }) => {
   const router = useRouter();

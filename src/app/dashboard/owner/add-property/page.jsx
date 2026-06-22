@@ -1,4 +1,5 @@
-import AddPropertyForm from '@/components/dashboard/AddPropertyForm';
+import AddPropertyForm from '@/components/dashboard/owner/AddPropertyForm';
+import PageHeader from '@/components/dashboard/shared/PageHeader';
 import { getCurrentUser } from '@/lib/session';
 import React from 'react';
 
@@ -7,10 +8,10 @@ const AddPropertyPage = async () => {
 
   return (
     <div className='space-y-10 '>
-      <header>
-        <h2 className='text-3xl lg:text-4xl font-bold'>List Your Property</h2>
-        <p>Provide accurate information to help tenants find the right home.</p>
-      </header>
+      <PageHeader
+        title={'List Your Property'}
+        subtitle={'Provide accurate information to help tenants find the right home.'}
+      />
 
       <AddPropertyForm
         user={user} 

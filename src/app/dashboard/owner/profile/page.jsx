@@ -1,4 +1,4 @@
-import Profile from '@/components/dashboard/Profile';
+import Profile from '@/components/dashboard/shared/Profile';
 import { getCurrentUser } from '@/lib/session';
 
 const OwnerProfilePage = async () => {
