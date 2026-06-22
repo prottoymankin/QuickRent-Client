@@ -17,7 +17,7 @@ const MyPropertyPage = async () => {
 
       <Table>
         <Table.ScrollContainer>
-          <Table.Content aria-label="Team members" className="w-full">
+          <Table.Content aria-label="All properties" className="w-full">
             <Table.Header>
               <Table.Column isRowHeader>Title</Table.Column>
               <Table.Column>Location</Table.Column>

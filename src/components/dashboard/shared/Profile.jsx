@@ -1,16 +1,8 @@
+import { formatDate } from "@/utils/formatDate";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
 
 const Profile = ({ user }) => {
-  const formatDate = (dateString) => {
-    if (!dateString) return "N/A";
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
-
   return (
     <div className='space-y-6 w-full'>
       
