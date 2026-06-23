@@ -1,8 +1,33 @@
-import { Select, ListBox } from "@heroui/react";
+'use client';
 
-const RoleSelect = () => {
+import { updateUserRole } from "@/lib/actions/user";
+import { Select, ListBox, toast } from "@heroui/react";
+import { useRouter } from "next/navigation";
+
+const RoleSelect = ({ user }) => {
+  const router = useRouter();
+
+  const handleOnChange = async (role) => {
+    const updateData = {
+      userId: user?._id,
+      newRole: role
+    };
+
+    const result = await updateUserRole(updateData);
+    
+    if (result.acknowledged) {
+      toast.success(`User role updated successfully to ${role}`);
+      router.push('/dashboard/admin/all-users');
+    }
+  }
+
   return (
-    <Select className="w-full" placeholder="Change user role">
+    <Select 
+      aria-label='Role select'
+      className="w-full" 
+      onChange={handleOnChange}
+      placeholder="Change user role"
+    >
       <Select.Trigger>
         <Select.Value />
         <Select.Indicator />

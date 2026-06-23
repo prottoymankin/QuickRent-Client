@@ -36,7 +36,7 @@ const AllUserPage = async () => {
                     <Table.Cell>{formatDate(user?.createdAt)}</Table.Cell>
                     <Table.Cell>{user?.role}</Table.Cell>
                     <Table.Cell>
-                      <RoleSelect />
+                      <RoleSelect user={user} />
                     </Table.Cell>
                   </Table.Row>
                 ))
