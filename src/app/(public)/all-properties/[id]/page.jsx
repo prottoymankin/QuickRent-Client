@@ -112,7 +112,9 @@ const PropertyDetailsPage = async ({ params }) => {
 
           <div className='space-y-2'>
             <BookingButton />
-            <AddFavoriteButton />
+            <AddFavoriteButton
+              propertyId={id} 
+            />
           </div>
 
           <div>
