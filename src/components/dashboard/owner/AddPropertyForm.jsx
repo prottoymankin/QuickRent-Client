@@ -28,7 +28,8 @@ const AddPropertyForm = ({ user }) => {
       bedrooms: Number(formData.get("bedrooms")),
       bathrooms: Number(formData.get("bathrooms")),
       ownerId: user?.id,
-      owenerName: user?.name,
+      ownerName: user?.name,
+      ownerEmail: user?.email,
       status: 'Pending'
     };
 
