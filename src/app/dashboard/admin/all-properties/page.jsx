@@ -1,3 +1,4 @@
+import ApprovePropertyButton from "@/components/dashboard/admin/ApprovePropertyButton";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getProperties } from "@/lib/api/properties";
 import { Button, Chip, Table } from "@heroui/react";
@@ -5,7 +6,6 @@ import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 
 const AllPropertiesPage = async () => {
   const properties = await getProperties();
-  console.log(properties);
 
   return (
     <div className='space-y-10'>
@@ -38,20 +38,19 @@ const AllPropertiesPage = async () => {
                     <Table.Cell>{property?.ownerEmail}</Table.Cell>
                     <Table.Cell>{property?.rent}</Table.Cell>
                     <Table.Cell>
-                      <Chip color={
-                        property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
-                      }>
+                      <Chip 
+                        color={
+                          property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
+                        }
+                        variant="primary"
+                      >
                         {property?.status}
                       </Chip>
                     </Table.Cell>
                     <Table.Cell className='flex gap-4'>
-                      <Button 
-                        className='text-green-500'
-                        isIconOnly 
-                        variant="secondary"
-                      >
-                        <IoMdCheckmark />
-                      </Button>
+                      <ApprovePropertyButton
+                        property={property}
+                      />
 
                       <Button
                         isIconOnly 

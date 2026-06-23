@@ -6,3 +6,10 @@ export const createProperty = async (propertyData) => {
     body: JSON.stringify(propertyData)
   });
 }
+
+export const updatePropertyStatus = async (updateData) => {
+  return serverMutation('/api/properties', {
+    method: 'PATCH',
+    body: JSON.stringify(updateData)
+  })
+}

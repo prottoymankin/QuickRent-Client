@@ -35,9 +35,12 @@ const MyPropertyPage = async () => {
                     <Table.Cell>{property?.rent}</Table.Cell>
                     <Table.Cell>{property?.propertyType}</Table.Cell>
                     <Table.Cell>
-                      <Chip color={
-                        property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
-                      }>
+                      <Chip 
+                        color={
+                          property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
+                        }
+                        variant="primary"
+                      >
                         {property?.status}
                       </Chip>
                     </Table.Cell>
