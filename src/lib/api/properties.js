@@ -11,3 +11,7 @@ export const getProperties = async () => {
 export const getOwenerProperties = async (ownerId) => {
   return serverFetch(`/api/my-properties?ownerId=${ownerId}`);
 }
+
+export const getFeaturedProperties = async () => {
+  return serverFetch('/api/properties/featured');
+}

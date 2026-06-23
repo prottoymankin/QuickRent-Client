@@ -1,7 +1,8 @@
 import { Button, Chip } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaHome, FaMapMarkerAlt } from "react-icons/fa";
+import { MdOutlineSquareFoot } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
 
 const PropertyCard = ({ property }) => {
@@ -29,15 +30,21 @@ const PropertyCard = ({ property }) => {
           </p>
         </div>
 
-        <p className='flex gap-1 items-center text-sm'>
-          <FaMapMarkerAlt />
-          {property?.location}
-        </p>
+        <div>
+          <p className='flex gap-1 items-center text-sm'>
+            <FaMapMarkerAlt />
+            {property?.location}
+          </p>
 
-        <div className="flex flex-wrap gap-2">
-          {property?.amenities.map((item, idx) => (
-            <Chip key={idx}>{item}</Chip>
-          ))}
+          <p className='flex gap-1 items-center text-sm'>
+            <MdOutlineSquareFoot />
+            {property?.propertySize} sq ft
+          </p>
+
+          <p className='flex gap-1 items-center text-sm'>
+            <FaHome />
+            {property?.propertyType}
+          </p>
         </div>
 
         <Link href={`/all-properties/${property?._id}`}>

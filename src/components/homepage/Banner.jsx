@@ -10,7 +10,7 @@ const Banner = () => {
   ];
 
   return (
-    <div className="px-5">
+    <div>
 
       <div 
         className="border bg-[url(/images/banner.jpg)] bg-center bg-cover flex flex-col gap-10 items-center justify-center max-w-7xl min-h-[90vh] mx-auto overflow-hidden relative rounded-2xl w-full"
