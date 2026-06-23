@@ -1,5 +1,9 @@
 import { serverFetch } from "../core/server";
 
+export const getApprovedProperties = async () => {
+  return serverFetch('/api/properties/approved');
+}
+
 export const getProperties = async () => {
   return serverFetch('/api/properties');
 }
