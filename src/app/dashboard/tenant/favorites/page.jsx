@@ -1,9 +1,10 @@
+import FabPropertyDeleteBtn from "@/components/dashboard/owner/FabPropertyDeleteBtn";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getFavouritesByUserId } from "@/lib/api/favorites";
 import { getCurrentUser } from "@/lib/session";
 import { Button, Table } from "@heroui/react";
 import Link from "next/link";
-import { FaEye, FaTrashAlt } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 
 const FavoritesPage = async () => {
   const user = await getCurrentUser();
@@ -41,11 +42,10 @@ const FavoritesPage = async () => {
                         </Button>
                       </Link>
 
-                      <Button 
-                        isIconOnly 
-                        variant="danger">
-                        <FaTrashAlt />
-                      </Button>
+                      <FabPropertyDeleteBtn 
+                        userId={user?.id}
+                        propertyId={property?._id}
+                      />
                     </Table.Cell>
                   </Table.Row>
                 ))
