@@ -1,6 +1,7 @@
 import AddFavoriteButton from "@/components/homepage/AddFavoriteButton";
-import BookingButton from "@/components/homepage/BookingButton";
+import { BookingModal } from "@/components/homepage/BookingModal";
 import { getPropertyById } from "@/lib/api/properties";
+import { getCurrentUser } from "@/lib/session";
 import { Chip } from "@heroui/react";
 import Image from "next/image";
 import { BiCheck } from "react-icons/bi";
@@ -10,6 +11,7 @@ import { TbCurrencyTaka } from "react-icons/tb";
 const PropertyDetailsPage = async ({ params }) => {
   const { id } = await params;
   const property = await getPropertyById(id);
+  const user = await getCurrentUser();
 
   const bookingHighlights = [
     "Instant Booking Available",
@@ -111,7 +113,11 @@ const PropertyDetailsPage = async ({ params }) => {
           </div>
 
           <div className='space-y-2'>
-            <BookingButton />
+            <BookingModal
+              property={property}
+              user={user}
+            />
+            
             <AddFavoriteButton
               propertyId={id} 
             />

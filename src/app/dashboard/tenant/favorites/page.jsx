@@ -10,8 +10,6 @@ const FavoritesPage = async () => {
   const user = await getCurrentUser();
   const favorites = await getFavouritesByUserId(user?.id);
 
-  console.log(favorites);
-
   return (
     <div className='space-y-10'>
       <PageHeader
