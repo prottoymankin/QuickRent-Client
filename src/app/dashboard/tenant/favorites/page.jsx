@@ -1,10 +1,9 @@
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getFavouritesByUserId } from "@/lib/api/favorites";
 import { getCurrentUser } from "@/lib/session";
-import { Button } from "@heroui/react";
-import Image from "next/image";
+import { Button, Table } from "@heroui/react";
 import Link from "next/link";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaEye, FaTrashAlt } from "react-icons/fa";
 
 const FavoritesPage = async () => {
   const user = await getCurrentUser();
@@ -17,61 +16,44 @@ const FavoritesPage = async () => {
         subtitle={'Keep track of your favorite listings and revisit them anytime.'}
       />
 
-      <div className='gap-6 grid lg:grid-cols-2 xl:grid-cols-3'>
-        {
-          favorites.map(favorite => (
-            <div 
-              className="border rounded-xl overflow-hidden"
-              key={favorite?._id}
-            >
-              <div className='h-50 relative'>
-                <Image
-                  alt={favorite?.propertyTitle}
-                  className='object-cover'
-                  fill
-                  src={favorite?.image}
-                />
-              </div>
+      <Table>
+        <Table.ScrollContainer>
+          <Table.Content aria-label="Favorite Properties" className="w-full">
+            <Table.Header>
+              <Table.Column isRowHeader>PropertyTitle</Table.Column>
+              <Table.Column>Location</Table.Column>
+              <Table.Column>Rent</Table.Column>
+              <Table.Column>Type</Table.Column>
+              <Table.Column>Actions</Table.Column>
+            </Table.Header>
+            <Table.Body>
+              {
+                favorites.map(property => (
+                  <Table.Row key={property?._id}>
+                    <Table.Cell>{property?.propertyTitle}</Table.Cell>
+                    <Table.Cell>{property?.location}</Table.Cell>
+                    <Table.Cell>৳{property?.rent}</Table.Cell>
+                    <Table.Cell>{property?.propertyType}</Table.Cell>
+                    <Table.Cell className='flex gap-4'>
+                      <Link href={`/all-properties/${property?._id}`}>
+                        <Button isIconOnly>
+                          <FaEye />
+                        </Button>
+                      </Link>
 
-              <div className='p-6'>
-                <div>
-                  <h3 className="line-clamp-1 text-xl font-semibold">
-                    {favorite?.propertyTitle}
-                  </h3>
-
-                  <p className="text-lg">
-                    ৳ {favorite?.rent}
-                  </p>
-                </div>
-
-                <p className="flex items-center gap-1 text-sm">
-                  <FaMapMarkerAlt />
-                  {favorite.location}
-                </p>
-
-                <div className="flex gap-3 mt-4">
-                  <Link
-                    className='w-full'
-                    href={`/all-properties/${favorite._id}`}
-                  >
-                    <Button className='rounded-lg w-full'>
-                      View Details
-                    </Button>
-                  </Link>
-
-                  <Button
-                    className='rounded-lg w-full'
-                    variant="danger"
-                  >
-                    Remove
-                  </Button>
-                </div>
-              </div>
-
-            </div>
-          ))
-        }
-      </div>
+                      <Button 
+                        isIconOnly 
+                        variant="danger">
+                        <FaTrashAlt />
+                      </Button>
+                    </Table.Cell>
+                  </Table.Row>
+                ))
+              }
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
+      </Table>
     </div>
   );
 };

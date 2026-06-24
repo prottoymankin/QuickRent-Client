@@ -32,7 +32,7 @@ const MyPropertyPage = async () => {
                   <Table.Row key={property?._id}>
                     <Table.Cell>{property?.propertyTitle}</Table.Cell>
                     <Table.Cell>{property?.location}</Table.Cell>
-                    <Table.Cell>{property?.rent}</Table.Cell>
+                    <Table.Cell>৳{property?.rent}</Table.Cell>
                     <Table.Cell>{property?.propertyType}</Table.Cell>
                     <Table.Cell>
                       <Chip 

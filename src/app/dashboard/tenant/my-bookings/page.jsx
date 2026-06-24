@@ -19,7 +19,7 @@ const MyBookingsPage = async () => {
 
       <Table>
         <Table.ScrollContainer>
-          <Table.Content aria-label="Team members" className="min-w-[600px]">
+          <Table.Content aria-label="Team members" className="w-full">
             <Table.Header>
               <Table.Column isRowHeader>Property Name</Table.Column>
               <Table.Column>Booking Date</Table.Column>
@@ -33,7 +33,7 @@ const MyBookingsPage = async () => {
                   <Table.Row>
                     <Table.Cell>{b?.propertyTitle}</Table.Cell>
                     <Table.Cell>{formatDate(b?.bookingDate)}</Table.Cell>
-                    <Table.Cell>{b?.propertyAmount}</Table.Cell>
+                    <Table.Cell>৳{b?.propertyAmount}</Table.Cell>
                     <Table.Cell>
                       <Chip 
                         color={
