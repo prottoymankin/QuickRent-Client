@@ -32,7 +32,8 @@ export async function POST(request) {
       metadata: {
         propertyId: property?._id.toString(),
         tenantId: user?.id,
-        tenantName: bookingData?.name
+        tenantName: bookingData?.name,
+        moveInDate: bookingData?.moveInDate
       },
       mode: 'payment',
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,

@@ -1,6 +1,6 @@
 "use client";
 
-import {Button, DateField, Input, Label, Modal, Surface, TextArea, TextField} from "@heroui/react";
+import {Button, DateField, Input, Label, Modal, Surface, TextField} from "@heroui/react";
 
 export function BookingModal({ property, user }) {
   return (
@@ -67,25 +67,13 @@ export function BookingModal({ property, user }) {
                   <DateField 
                     className="w-full" 
                     isRequired
-                    name="date"
+                    name="moveInDate"
                   >
-                    <Label>Move in Date</Label>
+                    <Label>Move-in Date</Label>
                     <DateField.Group variant="secondary">
                       <DateField.Input>{(segment) => <DateField.Segment segment={segment} />}</DateField.Input>
                     </DateField.Group>
                   </DateField>
-                  
-                  <div className="flex flex-col gap-2">
-                    <Label htmlFor="textarea-rows-3">Additional Notes</Label>
-                    <TextArea
-                      aria-label="Short feedback"
-                      id="textarea-rows-3"
-                      name='note'
-                      placeholder="note..."
-                      rows={3}
-                      variant="secondary"
-                    />
-                  </div>
 
                   <Modal.Footer>
                     <Button 

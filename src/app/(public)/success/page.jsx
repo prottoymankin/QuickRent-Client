@@ -1,3 +1,4 @@
+import { createBooking } from '@/lib/actions/bookings'
 import { getPropertyById } from '@/lib/api/properties'
 import { stripe } from '@/lib/stripe'
 import { formatDate } from '@/utils/formatDate'
@@ -27,7 +28,27 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === 'complete') {
-    const property = await getPropertyById(metadata.propertyId)
+    const property = await getPropertyById(metadata.propertyId);
+
+    const bookingData = {
+      ...metadata,
+      
+      ownerId: property?.ownerId,
+      ownerName: property?.ownerName,
+
+      propertyId: property?._id,
+      propertyTitle: property?.propertyTitle,
+      propertyAmount: property?.rent,
+
+      transactionId: payment_intent.id,
+
+      bookingDate: new Date(),
+      bookingStatus: 'Pending',
+      paymentStatus: payment_status
+    }
+
+    const result = await createBooking(bookingData);
+    console.log(result);
 
     return (
       <section id='success'>
