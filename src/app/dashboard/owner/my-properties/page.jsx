@@ -39,7 +39,7 @@ const MyPropertyPage = async () => {
                         color={
                           property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
                         }
-                        variant="primary"
+                        variant="secondary"
                       >
                         {property?.status}
                       </Chip>
