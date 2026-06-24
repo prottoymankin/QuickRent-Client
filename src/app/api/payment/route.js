@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import { stripe } from '../../../lib/stripe'
 import { getPropertyById } from '@/lib/api/properties'
+import { getCurrentUser } from '@/lib/session'
 
 export async function POST(request) {
   try {
@@ -10,6 +11,7 @@ export async function POST(request) {
 
     const formData = await request.formData();
     const bookingData = Object.fromEntries(formData.entries());
+    const user = await getCurrentUser();
     
     const property = await getPropertyById(bookingData?.propertyId);
 
@@ -27,6 +29,11 @@ export async function POST(request) {
           quantity: 1,
         },
       ],
+      metadata: {
+        propertyId: property?._id.toString(),
+        tenantId: user?.id,
+        tenantName: bookingData?.name
+      },
       mode: 'payment',
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
     });

@@ -100,7 +100,7 @@ export function BookingModal({ property, user }) {
                       className='rounded-lg'
                       type='submit'
                     >
-                      Send Message
+                      Confirm Booking
                     </Button>
                   </Modal.Footer>
                 </form>
