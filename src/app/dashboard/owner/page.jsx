@@ -1,6 +1,7 @@
+import MonthlyEarningsChart from '@/components/dashboard/owner/MonthlyEarningsChart';
 import SummeryCard from '@/components/dashboard/owner/SummeryCard';
 import PageHeader from '@/components/dashboard/shared/PageHeader';
-import { getBookingRequestById, getOwnerTotalIncome } from '@/lib/api/bookings';
+import { getBookingRequestById, getOwnerMonthlyEarnings, getOwnerTotalIncome } from '@/lib/api/bookings';
 import { getOwenerProperties } from '@/lib/api/properties';
 import { getCurrentUser } from '@/lib/session';
 import React from 'react';
@@ -14,6 +15,8 @@ const OwnerDashboardPage = async () => {
   const confirmdBookings = bookings.filter(booking => booking?.bookingStatus === 'Approved');
 
   const { totalIncome } = await getOwnerTotalIncome(user?.id);
+
+  const monthlyEarnings = await getOwnerMonthlyEarnings(user?.id);
 
   return (
     <div className='space-y-10'>
@@ -41,6 +44,10 @@ const OwnerDashboardPage = async () => {
           value={confirmdBookings.length}
         />
       </section>
+
+      <MonthlyEarningsChart
+        monthlyEarnings={monthlyEarnings}
+      />
     </div>
   );
 };
