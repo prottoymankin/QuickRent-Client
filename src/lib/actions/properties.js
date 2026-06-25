@@ -19,3 +19,10 @@ export const deleteProperty = async (propertyId) => {
     method: 'DELETE'
   });
 }
+
+export const updateProperty = async (propertyId, updateData) => {
+  return serverMutation(`/api/properties/${propertyId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(updateData)
+  });
+}

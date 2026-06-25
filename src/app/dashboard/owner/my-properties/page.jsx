@@ -1,4 +1,5 @@
 import { DeletePropertyModal } from "@/components/dashboard/shared/DeletePropertyModal";
+import { EditPropertyModal } from "@/components/dashboard/shared/EditPropertyModal";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getOwenerProperties } from "@/lib/api/properties";
 import { getCurrentUser } from "@/lib/session";
@@ -46,9 +47,10 @@ const MyPropertyPage = async () => {
                       </Chip>
                     </Table.Cell>
                     <Table.Cell className='flex gap-4'>
-                      <Button isIconOnly variant="secondary">
-                        <Pencil />
-                      </Button>
+                      <EditPropertyModal
+                        property={property}
+                        route={'/dashboard/owner/my-properties'}
+                      />
 
                       <DeletePropertyModal
                         propertyId={property?._id}

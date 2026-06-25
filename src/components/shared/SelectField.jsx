@@ -1,12 +1,13 @@
 import {Label, ListBox, Select} from "@heroui/react";
 
-export function SelectField({label, options, name}) {
+export function SelectField({label, options, name, defaulteSelectedKey}) {
   return (
     <Select
-      isRequired
       className='w-full'
+      defaultSelectedKey={defaulteSelectedKey ? [defaulteSelectedKey] : ''}
       name={name} 
       placeholder="Select one"
+      isRequired
     >
       <Label>{label}</Label>
       <Select.Trigger>
