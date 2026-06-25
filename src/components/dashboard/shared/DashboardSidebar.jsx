@@ -25,7 +25,7 @@ export async function DashboardSidebar () {
   const adminNavItems = [
     { icon: Persons, href: '/dashboard/admin/all-users', label: 'All Users'},
     { icon: LiaBuildingSolid, href: '/dashboard/admin/all-properties', label: 'All Properties'},
-    { icon: ListUl, href: '/dashboard/admin/all-boolings', label: 'All Bookings'},
+    { icon: ListUl, href: '/dashboard/admin/all-bookings', label: 'All Bookings'},
     { icon: CreditCard, href: '/dashboard/admin/transactions', label: 'Transactions'},
     { icon: Person, href: '/dashboard/admin/profile', label: 'Profile'},
   ];

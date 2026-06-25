@@ -7,3 +7,7 @@ export const getBookingsById = async (tenantId) => {
 export const getBookingRequestById = async (ownerId) => {
   return serverFetch(`/api/bookings/owner/${ownerId}`);
 }
+
+export const getAllBookings = async () => {
+  return serverFetch('/api/bookings');
+}
