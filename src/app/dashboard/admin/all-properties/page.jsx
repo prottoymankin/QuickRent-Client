@@ -1,4 +1,5 @@
 import ApprovePropertyButton from "@/components/dashboard/admin/ApprovePropertyButton";
+import { DeletePropertyModal } from "@/components/dashboard/admin/DeletePropertyModal";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getProperties } from "@/lib/api/properties";
 import { Button, Chip, Table } from "@heroui/react";
@@ -58,6 +59,10 @@ const AllPropertiesPage = async () => {
                       >
                         <IoMdClose />
                       </Button>
+
+                     <DeletePropertyModal
+                      propertyId={property?._id}
+                     />
                     </Table.Cell>
                   </Table.Row>
                 ))
