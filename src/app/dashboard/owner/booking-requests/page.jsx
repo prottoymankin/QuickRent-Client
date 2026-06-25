@@ -1,3 +1,4 @@
+import BookingStatusUpdateBtn from "@/components/dashboard/owner/BookingStatusUpdateBtn";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getBookingRequestById } from "@/lib/api/bookings";
 import { getCurrentUser } from "@/lib/session";
@@ -48,7 +49,7 @@ const BookinRequestPage =  async () => {
                     <Table.Cell>
                       <Chip 
                         color={
-                          req?.bookingStatus === 'Pending' ? "warning" : b?.bookingStatus === 'Approved' ? 'success' : 'danger'
+                          req?.bookingStatus === 'Pending' ? "warning" : req?.bookingStatus === 'Approved' ? 'success' : 'danger'
                         }
                         variant="secondary"
                       >
@@ -56,13 +57,19 @@ const BookinRequestPage =  async () => {
                       </Chip>
                     </Table.Cell>
                     <Table.Cell className='flex gap-4'>
-                      <Button isIconOnly>
-                        <Check />
-                      </Button>
+                      <BookingStatusUpdateBtn
+                        icon={<Check />}
+                        status={'Approved'}
+                        variant={'primary'}
+                        id={req?._id}
+                      />
 
-                      <Button isIconOnly variant='danger'>
-                        <Xmark />
-                      </Button>
+                      <BookingStatusUpdateBtn
+                        icon={<Xmark />}
+                        status={'Reject'}
+                        variant={'danger'}
+                        id={req?._id}
+                      />
                     </Table.Cell>
                   </Table.Row>
                 ))

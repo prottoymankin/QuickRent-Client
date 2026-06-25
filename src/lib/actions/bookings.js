@@ -6,3 +6,10 @@ export const createBooking = async (data) => {
     body: JSON.stringify(data)
   });
 }
+
+export const updateBookingStatus = async (updateData, id) => {
+  return serverMutation(`/api/bookings/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(updateData)
+  });
+}
