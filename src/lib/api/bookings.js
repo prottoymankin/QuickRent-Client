@@ -11,3 +11,7 @@ export const getBookingRequestById = async (ownerId) => {
 export const getAllBookings = async () => {
   return serverFetch('/api/bookings');
 }
+
+export const getOwnerTotalIncome = async (ownerId) => {
+  return serverFetch(`/api/bookings/${ownerId}/income`);
+}
