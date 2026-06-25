@@ -1,9 +1,10 @@
 import ApprovePropertyButton from "@/components/dashboard/admin/ApprovePropertyButton";
 import { DeletePropertyModal } from "@/components/dashboard/shared/DeletePropertyModal";
+import { EditPropertyModal } from "@/components/dashboard/shared/EditPropertyModal";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getProperties } from "@/lib/api/properties";
 import { Button, Chip, Table } from "@heroui/react";
-import { IoMdCheckmark, IoMdClose } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 
 const AllPropertiesPage = async () => {
   const properties = await getProperties();
@@ -60,9 +61,14 @@ const AllPropertiesPage = async () => {
                         <IoMdClose />
                       </Button>
 
+                      <EditPropertyModal
+                        property={property}
+                        route={'/dashboard/admin/all-properties'}
+                      />
+
                      <DeletePropertyModal
-                      propertyId={property?._id}
-                      route={'/dashboard/admin/all-properties'}
+                        propertyId={property?._id}
+                        route={'/dashboard/admin/all-properties'}
                      />
                     </Table.Cell>
                   </Table.Row>
