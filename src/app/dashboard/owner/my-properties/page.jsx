@@ -1,3 +1,4 @@
+import { DeletePropertyModal } from "@/components/dashboard/shared/DeletePropertyModal";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getOwenerProperties } from "@/lib/api/properties";
 import { getCurrentUser } from "@/lib/session";
@@ -49,9 +50,10 @@ const MyPropertyPage = async () => {
                         <Pencil />
                       </Button>
 
-                      <Button isIconOnly variant="danger">
-                        <TrashBin />
-                      </Button>
+                      <DeletePropertyModal
+                        propertyId={property?._id}
+                        route={'/dashboard/owner/my-properties'}
+                      />
                     </Table.Cell>
                   </Table.Row>
                 ))

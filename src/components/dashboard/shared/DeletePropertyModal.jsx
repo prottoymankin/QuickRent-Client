@@ -5,7 +5,7 @@ import { TrashBin } from "@gravity-ui/icons";
 import {AlertDialog, Button, toast} from "@heroui/react";
 import { useRouter } from "next/navigation";
 
-export function DeletePropertyModal({ propertyId }) {
+export function DeletePropertyModal({ propertyId, route }) {
   const router = useRouter();
 
   const handleDeleteProperty = async () => {
@@ -13,7 +13,7 @@ export function DeletePropertyModal({ propertyId }) {
     
     if (response.acknowledged) {
       toast.success('Property deleted successfully.');
-      router.push('/dashboard/admin/all-properties');
+      router.push(route);
     }
   }
 
