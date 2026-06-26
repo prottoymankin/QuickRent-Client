@@ -14,6 +14,13 @@ export const updatePropertyStatus = async (updateData) => {
   })
 }
 
+export const rejectProperty = async (propertyId, updateData) => {
+  return serverMutation(`/api/properties/${propertyId}/rejection`, {
+    method: 'PATCH',
+    body: JSON.stringify(updateData)
+  });
+}
+
 export const deleteProperty = async (propertyId) => {
   return serverMutation(`/api/properties/${propertyId}`, {
     method: 'DELETE'

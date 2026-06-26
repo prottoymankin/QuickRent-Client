@@ -1,4 +1,5 @@
 import ApprovePropertyButton from "@/components/dashboard/admin/ApprovePropertyButton";
+import { PropertyRejectBtn } from "@/components/dashboard/admin/PropertyRejectBtn";
 import { DeletePropertyModal } from "@/components/dashboard/shared/DeletePropertyModal";
 import { EditPropertyModal } from "@/components/dashboard/shared/EditPropertyModal";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
@@ -24,7 +25,6 @@ const AllPropertiesPage = async () => {
               <Table.Column>Property Type</Table.Column>
               <Table.Column>Location</Table.Column>
               <Table.Column>Owner Name</Table.Column>
-              <Table.Column>Owner Email</Table.Column>
               <Table.Column>Rent</Table.Column>
               <Table.Column>Status</Table.Column>
               <Table.Column>Actions</Table.Column>
@@ -37,14 +37,13 @@ const AllPropertiesPage = async () => {
                     <Table.Cell>{property?.propertyType}</Table.Cell>
                     <Table.Cell>{property?.location}</Table.Cell>
                     <Table.Cell>{property?.ownerName}</Table.Cell>
-                    <Table.Cell>{property?.ownerEmail}</Table.Cell>
                     <Table.Cell>{property?.rent}</Table.Cell>
                     <Table.Cell>
                       <Chip 
                         color={
                           property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
                         }
-                        variant="primary"
+                        variant="secondary"
                       >
                         {property?.status}
                       </Chip>
@@ -54,12 +53,9 @@ const AllPropertiesPage = async () => {
                         property={property}
                       />
 
-                      <Button
-                        isIconOnly 
-                        variant="danger"
-                      >
-                        <IoMdClose />
-                      </Button>
+                      <PropertyRejectBtn
+                        propertyId={property?._id}
+                      />
 
                       <EditPropertyModal
                         property={property}

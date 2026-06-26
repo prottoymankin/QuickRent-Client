@@ -1,3 +1,4 @@
+import { ViewRejectModal } from "@/components/dashboard/owner/ViewRejectModal";
 import { DeletePropertyModal } from "@/components/dashboard/shared/DeletePropertyModal";
 import { EditPropertyModal } from "@/components/dashboard/shared/EditPropertyModal";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
@@ -26,6 +27,7 @@ const MyPropertyPage = async () => {
               <Table.Column>Rent</Table.Column>
               <Table.Column>Type</Table.Column>
               <Table.Column>Status</Table.Column>
+              <Table.Column>Rejection Reason</Table.Column>
               <Table.Column>Actions</Table.Column>
             </Table.Header>
             <Table.Body>
@@ -36,7 +38,7 @@ const MyPropertyPage = async () => {
                     <Table.Cell>{property?.location}</Table.Cell>
                     <Table.Cell>৳{property?.rent}</Table.Cell>
                     <Table.Cell>{property?.propertyType}</Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell className='space-x-2'>
                       <Chip 
                         color={
                           property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
@@ -46,6 +48,19 @@ const MyPropertyPage = async () => {
                         {property?.status}
                       </Chip>
                     </Table.Cell>
+                    
+                    <Table.Cell>
+                      {
+                        property?.rejectReason ? (
+                          <ViewRejectModal
+                            rejectReason={property?.rejectReason} 
+                          />
+                        ) : (
+                          <span>N/A</span>
+                        )
+                      }
+                    </Table.Cell>
+
                     <Table.Cell className='flex gap-4'>
                       <EditPropertyModal
                         property={property}
