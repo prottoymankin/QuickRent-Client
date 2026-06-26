@@ -41,7 +41,7 @@ const ReviewForm = ({ property, user }) => {
   }
 
   return (
-    <div className='flex-1 space-y-4'>
+    <div className='flex-1 space-y-4 lg:sticky lg:top-20'>
       <h3 className="font-medium text-2xl">Review & Rating</h3>
 
       <form 

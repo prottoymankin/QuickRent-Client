@@ -36,7 +36,7 @@ const topLocations = [
 export default function TopLocations() {
   return (
     <section>
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="mx-auto mb-14 max-w-3xl text-center">
           <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">

@@ -11,28 +11,28 @@ const Banner = () => {
 
   return (
     <div>
-
       <div 
-        className="border bg-[url(/images/banner.jpg)] bg-center bg-cover flex flex-col gap-10 items-center justify-center max-w-7xl min-h-[90vh] mx-auto overflow-hidden relative rounded-2xl w-full"
+        className="border bg-[url(/images/banner.jpg)] bg-center bg-cover flex flex-col gap-10 items-center justify-center max-w-7xl min-h-[90vh] mx-auto overflow-hidden p-6 relative rounded-2xl w-full"
       >
-        <div className="absolute bg-black/60 inset h-full w-full"></div>
+        <div className="absolute bg-black/60 inset h-full w-full">
+        </div>
 
         <div 
           className="leading-[1.1] relative space-y-4 text-center text-zinc-50 z-10"
         >
           <h1 
-            className="font-bold max-w-lg text-3xl sm:text-3xl md:text-5xl"
+            className="font-bold max-w-2xl text-3xl sm:text-3xl md:text-5xl lg:text-6xl"
           >
             The Smarter Way to Rent and Manage Properties
           </h1>
 
-          <p className="leading-[1.1] max-w-lg">
+          <p className="leading-[1.1] max-w-lg mx-auto">
             QuickRent connects tenants and property owners through a secure marketplace, making property discovery, booking, and management simple and hassle-free.
           </p>
         </div>
 
         <div 
-          className="bg-white/10 backdrop-blur-xs  p-6 rounded-xl space-y-6"
+          className="bg-white/10 backdrop-blur-xs flex flex-col lg:flex-row gap-6 p-6 rounded-xl"
         >
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="flex flex-col sm:flex-row gap-6">
@@ -78,7 +78,9 @@ const Banner = () => {
           </div>
 
           <div className="flex justify-center">
-            <Button>
+            <Button
+              className='bg-emerald-600 hover:bg-emerald-700 lg:w-fit rounded-lg w-full'
+            >
               Search
             </Button>
           </div>

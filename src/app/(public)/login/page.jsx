@@ -40,7 +40,7 @@ const LoginPage = () => {
 
         <div className="flex gap-2 justify-center text-sm">
           <p className="text-muted">Already have an account?</p>
-          <Link className="hover:underline font-medium" href='/signup'>
+          <Link className="hover:underline font-medium" href='/register'>
             Sign up to continue.
           </Link>
         </div>
