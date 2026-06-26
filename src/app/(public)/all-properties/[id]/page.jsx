@@ -1,17 +1,21 @@
 import AddFavoriteButton from "@/components/homepage/AddFavoriteButton";
 import { BookingModal } from "@/components/homepage/BookingModal";
+import ReviewCard from "@/components/homepage/ReviewCard";
+import ReviewForm from "@/components/homepage/ReviewForm";
 import { getPropertyById } from "@/lib/api/properties";
+import { getReviewsById } from "@/lib/api/reviews";
 import { getCurrentUser } from "@/lib/session";
-import { Chip } from "@heroui/react";
+import { Avatar, Chip } from "@heroui/react";
 import Image from "next/image";
 import { BiCheck } from "react-icons/bi";
-import { FaBed, FaHome, FaMapMarkerAlt, FaRulerCombined, FaShower } from "react-icons/fa";
+import { FaBed, FaHome, FaMapMarkerAlt, FaRegCommentDots, FaRulerCombined, FaShower } from "react-icons/fa";
 import { TbCurrencyTaka } from "react-icons/tb";
 
 const PropertyDetailsPage = async ({ params }) => {
   const { id } = await params;
   const property = await getPropertyById(id);
   const user = await getCurrentUser();
+  const reviews = await getReviewsById(property?._id);
 
   const bookingHighlights = [
     "Instant Booking Available",
@@ -101,7 +105,9 @@ const PropertyDetailsPage = async ({ params }) => {
           </div>
         </div>
 
-        <div className='border p-6 rounded-2xl sticky top-0 space-y-6 w-full lg:w-auto'>
+        <div 
+          className='border p-6 rounded-2xl sticky top-20 space-y-6 w-full lg:w-auto'
+        >
           <div>
             <h3 className="text-lg lg:text-xl">{property?.propertyTitle}</h3>
 
@@ -140,6 +146,53 @@ const PropertyDetailsPage = async ({ params }) => {
             }
           </div>
         </div>
+      </div>
+      
+      <div className='flex flex-col lg:items-start lg:flex-row gap-6'>
+        {
+          user?.role === 'Tenant' && (
+            <ReviewForm
+              property={property}
+              user={user} 
+            />
+          )
+        }
+
+        {
+          reviews.length === 0 ? (
+            <div 
+              className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-default-300 bg-content1 px-8 py-16 text-center"
+            >
+              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <FaRegCommentDots size={28} />
+              </div>
+
+              <h3 className="text-2xl font-semibold">
+                No Reviews Yet
+              </h3>
+
+              <p className="mt-3 max-w-md text-default-500">
+                This property hasn't received any reviews yet. Be the first tenant to
+                share your experience and help others make informed decisions.
+              </p>
+            </div>
+          ) : (
+            <div className='flex-1 space-y-4'>
+              <h3 className='text-2xl font-bold'>Reviews</h3>
+
+              <div className='flex flex-col gap-4 rounded-xl'>
+                {
+                  reviews.map(review => (
+                    <ReviewCard
+                      key={review?._id}
+                      review={review}
+                    />
+                  ))
+                }
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   );
