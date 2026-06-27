@@ -1,11 +1,15 @@
 import { serverFetch } from "../core/server";
 
-export const getApprovedProperties = async () => {
-  return serverFetch('/api/properties/approved');
+export const getApprovedProperties = async (page) => {
+  if (!page) page = 1;
+
+  return serverFetch(`/api/properties/approved?page=${page}`);
 }
 
-export const getProperties = async () => {
-  return serverFetch('/api/properties');
+export const getProperties = async (page) => {
+  if (!page) page = 1;
+
+  return serverFetch(`/api/properties?page=${page}`);
 }
 
 export const getOwenerProperties = async (ownerId) => {
@@ -20,13 +24,13 @@ export const getPropertyById = async (id) => {
   return serverFetch(`/api/properties/${id}`);
 }
 
-export const searchProperties = async (search) => {
-  return serverFetch(`/api/properties/search?q=${encodeURIComponent(search)}`);
+export const searchProperties = async (search, page) => {
+  return serverFetch(`/api/properties/search?q=${encodeURIComponent(search)}&page=${page}`);
 }
 
-export const filterByPropertyType = async (propertyType) => {
+export const filterByPropertyType = async (propertyType, page) => {
   return serverFetch(
-    `/api/properties/filter/type?propertyType=${propertyType}`
+    `/api/properties/filter/type?propertyType=${propertyType}&page=${page}`
   );
 };
 

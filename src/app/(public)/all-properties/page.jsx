@@ -3,88 +3,62 @@
 import EmptyProperties from "@/components/homepage/EmptyProperties";
 import PropertyCard from "@/components/shared/PropertyCard";
 import { filterByPropertyType, getApprovedProperties, searchProperties, sortProperties } from "@/lib/api/properties";
-import { Label, SearchField, Select, ListBox, Spinner } from "@heroui/react";
+import { Label, SearchField, Select, ListBox, Spinner, Pagination } from "@heroui/react";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const PublicAllPropertiesPage = () => {
+  const searchParams = useSearchParams();
+
+  const [currentPage, setCurrentPage] = useState(
+    Number(searchParams.get("page")) || 1
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [properties, setProperties] = useState([]);
   const [propertyType, setPropertyType] = useState("");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("default");
+  const [totalPages, setTotalPages] = useState(0);
 
   const propertyTypes = ["Apartment", "House", "Villa", "Studio", "Office"];
   const sortOptions = [
-  {
-    label: "Default",
-    value: "default",
-  },
-  {
-    label: "Price: Low to High",
-    value: "low-to-high",
-  },
-  {
-    label: "Price: High to Low",
-    value: "high-to-low",
-  },
-];
+    {
+      label: "Default",
+      value: "default",
+    },
+    {
+      label: "Price: Low to High",
+      value: "low-to-high",
+    },
+    {
+      label: "Price: High to Low",
+      value: "high-to-low",
+    },
+  ];
 
   useEffect(() => {
     const loadProperties = async () => {
       setIsLoading(true);
-      const data = await getApprovedProperties();
-      setProperties(data);
-      setIsLoading(false);
-    }
 
-    loadProperties();
-  }, []);
+      let result;
 
-  useEffect(() => {
-    const timeout = setTimeout(async () => {
-      setIsLoading(true);
-
-      const data = await searchProperties(search);
-
-      setProperties(data);
-
-      setIsLoading(false);
-    }, 500);
-
-    return () => clearTimeout(timeout);
-  }, [search]);
-
-  useEffect(() => {
-     const loadProperties = async () => {
-      setIsLoading(true);
-
-      if (propertyType) {
-        const data = await filterByPropertyType(propertyType);
-        setProperties(data);
+      if (search.trim()) {
+        result = await searchProperties(search, currentPage);
+      } else if (propertyType) {
+        result = await filterByPropertyType(propertyType, currentPage);
+      } else if (sort !== "default") {
+        result = await sortProperties(sort, currentPage);
       } else {
-        const data = await getApprovedProperties();
-        setProperties(data);
+        result = await getApprovedProperties(currentPage);
       }
 
+      setProperties(result.data);
+      setTotalPages(result.totalPage);
       setIsLoading(false);
     };
 
     loadProperties();
-  }, [propertyType]);
-
-  useEffect(() => {
-    const loadSortedProperties = async () => {
-      if (sort === "default") {
-        const data = await getApprovedProperties();
-        setProperties(data);
-      } else {
-        const data = await sortProperties(sort);
-        setProperties(data);
-      }
-    };
-
-    loadSortedProperties();
-  }, [sort]);
+  }, [search, propertyType, sort, currentPage]);
 
   return (
     <div className='max-w-7xl mx-auto p-6 space-y-10 w-full'>
@@ -104,7 +78,10 @@ const PublicAllPropertiesPage = () => {
           className='w-full'
           name="search"
           value={search}
-          onChange={setSearch}
+          onChange={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
         >
           <Label>Search</Label>
           <SearchField.Group>
@@ -181,18 +158,58 @@ const PublicAllPropertiesPage = () => {
             <span className="text-xs text-muted">Loading...</span>
           </div>
         ) : properties.length > 0 ? (
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {properties.map((property) => (
-              <PropertyCard
-                key={property._id}
-                property={property}
-              />
-            ))}
-          </section>
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {properties.map((property) => (
+                <PropertyCard
+                  key={property._id}
+                  property={property}
+                />
+              ))}
+            </section>
+
         ) : (
           <EmptyProperties />
         )
       }
+
+      {
+        properties.length > 0 && (
+          <Pagination className="justify-center">
+            <Pagination.Content>
+              <Pagination.Item>
+                <Pagination.Previous 
+                  isDisabled={currentPage === 1}
+                  onPress={() => setCurrentPage((p) => p - 1)}
+                >
+                  <Pagination.PreviousIcon />
+                  <span>Previous</span>
+                </Pagination.Previous>
+              </Pagination.Item>
+              {Array.from({length: totalPages}, (_, i) => i + 1).map((p) => (
+                <Pagination.Item key={p}>
+                  <Pagination.Link
+                    className={p === currentPage && 'bg-emerald-600 text-white'} 
+                    isActive={p === currentPage}
+                    onPress={() => setCurrentPage(p)}
+                  >
+                    {p}
+                  </Pagination.Link>
+                </Pagination.Item>
+              ))}
+              <Pagination.Item>
+                <Pagination.Next 
+                  isDisabled={currentPage === totalPages}
+                  onPress={() => setCurrentPage((p) => p + 1)} 
+                >
+                  <span>Next</span>
+                  <Pagination.NextIcon />
+                </Pagination.Next>
+              </Pagination.Item>
+            </Pagination.Content>
+          </Pagination>
+        )
+      }
+
     </div>
   );
 };
