@@ -19,3 +19,7 @@ export const getFeaturedProperties = async () => {
 export const getPropertyById = async (id) => {
   return serverFetch(`/api/properties/${id}`);
 }
+
+export const searchProperties = async (search) => {
+  return serverFetch(`/api/properties/search?q=${encodeURIComponent(search)}`);
+}
