@@ -18,67 +18,78 @@ const MyPropertyPage = async () => {
         subtitle={'Keep track of your property listings and their approval status.'}
       />
 
-      <Table>
-        <Table.ScrollContainer>
-          <Table.Content aria-label="All properties" className="w-full">
-            <Table.Header>
-              <Table.Column isRowHeader>Title</Table.Column>
-              <Table.Column>Location</Table.Column>
-              <Table.Column>Rent</Table.Column>
-              <Table.Column>Type</Table.Column>
-              <Table.Column>Status</Table.Column>
-              <Table.Column>Rejection Reason</Table.Column>
-              <Table.Column>Actions</Table.Column>
-            </Table.Header>
-            <Table.Body>
-              {
-                properties.map(property => (
-                  <Table.Row key={property?._id}>
-                    <Table.Cell>{property?.propertyTitle}</Table.Cell>
-                    <Table.Cell>{property?.location}</Table.Cell>
-                    <Table.Cell>৳{property?.rent}</Table.Cell>
-                    <Table.Cell>{property?.propertyType}</Table.Cell>
-                    <Table.Cell className='space-x-2'>
-                      <Chip 
-                        color={
-                          property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
-                        }
-                        variant="secondary"
-                      >
-                        {property?.status}
-                      </Chip>
-                    </Table.Cell>
-                    
-                    <Table.Cell>
-                      {
-                        property?.rejectReason ? (
-                          <ViewRejectModal
-                            rejectReason={property?.rejectReason} 
+      {
+        properties.length > 0 ? (
+          <Table>
+            <Table.ScrollContainer>
+              <Table.Content aria-label="All properties" className="w-full">
+                <Table.Header>
+                  <Table.Column isRowHeader>Title</Table.Column>
+                  <Table.Column>Location</Table.Column>
+                  <Table.Column>Rent</Table.Column>
+                  <Table.Column>Type</Table.Column>
+                  <Table.Column>Status</Table.Column>
+                  <Table.Column>Rejection Reason</Table.Column>
+                  <Table.Column>Actions</Table.Column>
+                </Table.Header>
+                <Table.Body>
+                  {
+                    properties.map(property => (
+                      <Table.Row key={property?._id}>
+                        <Table.Cell>{property?.propertyTitle}</Table.Cell>
+                        <Table.Cell>{property?.location}</Table.Cell>
+                        <Table.Cell>৳{property?.rent}</Table.Cell>
+                        <Table.Cell>{property?.propertyType}</Table.Cell>
+                        <Table.Cell className='space-x-2'>
+                          <Chip 
+                            color={
+                              property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
+                            }
+                            variant="secondary"
+                          >
+                            {property?.status}
+                          </Chip>
+                        </Table.Cell>
+                        
+                        <Table.Cell>
+                          {
+                            property?.rejectReason ? (
+                              <ViewRejectModal
+                                rejectReason={property?.rejectReason} 
+                              />
+                            ) : (
+                              <span>N/A</span>
+                            )
+                          }
+                        </Table.Cell>
+
+                        <Table.Cell className='flex gap-4'>
+                          <EditPropertyModal
+                            property={property}
+                            route={'/dashboard/owner/my-properties'}
                           />
-                        ) : (
-                          <span>N/A</span>
-                        )
-                      }
-                    </Table.Cell>
 
-                    <Table.Cell className='flex gap-4'>
-                      <EditPropertyModal
-                        property={property}
-                        route={'/dashboard/owner/my-properties'}
-                      />
-
-                      <DeletePropertyModal
-                        propertyId={property?._id}
-                        route={'/dashboard/owner/my-properties'}
-                      />
-                    </Table.Cell>
-                  </Table.Row>
-                ))
-              }
-            </Table.Body>
-          </Table.Content>
-        </Table.ScrollContainer>
-      </Table>
+                          <DeletePropertyModal
+                            propertyId={property?._id}
+                            route={'/dashboard/owner/my-properties'}
+                          />
+                        </Table.Cell>
+                      </Table.Row>
+                    ))
+                  }
+                </Table.Body>
+              </Table.Content>
+            </Table.ScrollContainer>
+          </Table>
+        ) : (
+          <EmptyState
+            title="No Properties Found"
+            description="You haven't added any properties yet. Start by listing your first rental property."
+            buttonText="Add Property"
+            buttonHref="/dashboard/owner/add-property"
+          />
+        )
+      }
     </div>
   );
 };

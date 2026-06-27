@@ -1,4 +1,5 @@
 import FabPropertyDeleteBtn from "@/components/dashboard/owner/FabPropertyDeleteBtn";
+import EmptyState from "@/components/dashboard/shared/EmptyState";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getFavouritesByUserId } from "@/lib/api/favorites";
 import { getCurrentUser } from "@/lib/session";
@@ -17,43 +18,54 @@ const FavoritesPage = async () => {
         subtitle={'Keep track of your favorite listings and revisit them anytime.'}
       />
 
-      <Table>
-        <Table.ScrollContainer>
-          <Table.Content aria-label="Favorite Properties" className="w-full">
-            <Table.Header>
-              <Table.Column isRowHeader>PropertyTitle</Table.Column>
-              <Table.Column>Location</Table.Column>
-              <Table.Column>Rent</Table.Column>
-              <Table.Column>Type</Table.Column>
-              <Table.Column>Actions</Table.Column>
-            </Table.Header>
-            <Table.Body>
-              {
-                favorites.map(property => (
-                  <Table.Row key={property?._id}>
-                    <Table.Cell>{property?.propertyTitle}</Table.Cell>
-                    <Table.Cell>{property?.location}</Table.Cell>
-                    <Table.Cell>৳{property?.rent}</Table.Cell>
-                    <Table.Cell>{property?.propertyType}</Table.Cell>
-                    <Table.Cell className='flex gap-4'>
-                      <Link href={`/all-properties/${property?._id}`}>
-                        <Button isIconOnly>
-                          <FaEye />
-                        </Button>
-                      </Link>
+      {
+        favorites.length > 0 ? (
+          <Table>
+            <Table.ScrollContainer>
+              <Table.Content aria-label="Favorite Properties" className="w-full">
+                <Table.Header>
+                  <Table.Column isRowHeader>PropertyTitle</Table.Column>
+                  <Table.Column>Location</Table.Column>
+                  <Table.Column>Rent</Table.Column>
+                  <Table.Column>Type</Table.Column>
+                  <Table.Column>Actions</Table.Column>
+                </Table.Header>
+                <Table.Body>
+                  {
+                    favorites.map(property => (
+                      <Table.Row key={property?._id}>
+                        <Table.Cell>{property?.propertyTitle}</Table.Cell>
+                        <Table.Cell>{property?.location}</Table.Cell>
+                        <Table.Cell>৳{property?.rent}</Table.Cell>
+                        <Table.Cell>{property?.propertyType}</Table.Cell>
+                        <Table.Cell className='flex gap-4'>
+                          <Link href={`/all-properties/${property?._id}`}>
+                            <Button isIconOnly>
+                              <FaEye />
+                            </Button>
+                          </Link>
 
-                      <FabPropertyDeleteBtn 
-                        userId={user?.id}
-                        propertyId={property?._id}
-                      />
-                    </Table.Cell>
-                  </Table.Row>
-                ))
-              }
-            </Table.Body>
-          </Table.Content>
-        </Table.ScrollContainer>
-      </Table>
+                          <FabPropertyDeleteBtn 
+                            userId={user?.id}
+                            propertyId={property?._id}
+                          />
+                        </Table.Cell>
+                      </Table.Row>
+                    ))
+                  }
+                </Table.Body>
+              </Table.Content>
+            </Table.ScrollContainer>
+          </Table>
+        ) : (
+          <EmptyState
+            title="No Favorite Properties"
+            description="You haven't added any properties to your favorites yet."
+            buttonText="Explore Properties"
+            buttonHref="/all-properties"
+          />
+        )
+      }
     </div>
   );
 };

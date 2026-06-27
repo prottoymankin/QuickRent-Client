@@ -25,108 +25,117 @@ const AllPropertiesPage = async ({ searchParams }) => {
         subtitle={'Get a complete overview of all properties and their current status.'}
       />
 
-      <Table>
-        <Table.ScrollContainer>
-          <Table.Content aria-label="All properties" className="w-full">
-            <Table.Header>
-              <Table.Column isRowHeader>Property Title</Table.Column>
-              <Table.Column>Property Type</Table.Column>
-              <Table.Column>Location</Table.Column>
-              <Table.Column>Owner Name</Table.Column>
-              <Table.Column>Rent</Table.Column>
-              <Table.Column>Status</Table.Column>
-              <Table.Column>Actions</Table.Column>
-            </Table.Header>
-            <Table.Body>
-              {
-                properties.map(property => (
-                  <Table.Row key={property._id}>
-                    <Table.Cell>{property?.propertyTitle}</Table.Cell>
-                    <Table.Cell>{property?.propertyType}</Table.Cell>
-                    <Table.Cell>{property?.location}</Table.Cell>
-                    <Table.Cell>{property?.ownerName}</Table.Cell>
-                    <Table.Cell>{property?.rent}</Table.Cell>
-                    <Table.Cell>
-                      <Chip 
-                        color={
-                          property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
-                        }
-                        variant="secondary"
-                      >
-                        {property?.status}
-                      </Chip>
-                    </Table.Cell>
-                    <Table.Cell className='flex gap-4'>
-                      <ApprovePropertyButton
-                        property={property}
-                      />
+      {
+        properties.length > 0 ? (
+          <Table>
+            <Table.ScrollContainer>
+              <Table.Content aria-label="All properties" className="w-full">
+                <Table.Header>
+                  <Table.Column isRowHeader>Property Title</Table.Column>
+                  <Table.Column>Property Type</Table.Column>
+                  <Table.Column>Location</Table.Column>
+                  <Table.Column>Owner Name</Table.Column>
+                  <Table.Column>Rent</Table.Column>
+                  <Table.Column>Status</Table.Column>
+                  <Table.Column>Actions</Table.Column>
+                </Table.Header>
+                <Table.Body>
+                  {
+                    properties.map(property => (
+                      <Table.Row key={property._id}>
+                        <Table.Cell>{property?.propertyTitle}</Table.Cell>
+                        <Table.Cell>{property?.propertyType}</Table.Cell>
+                        <Table.Cell>{property?.location}</Table.Cell>
+                        <Table.Cell>{property?.ownerName}</Table.Cell>
+                        <Table.Cell>{property?.rent}</Table.Cell>
+                        <Table.Cell>
+                          <Chip 
+                            color={
+                              property?.status === 'Pending' ? "warning" : property?.status === 'Approved' ? 'success' : 'danger'
+                            }
+                            variant="secondary"
+                          >
+                            {property?.status}
+                          </Chip>
+                        </Table.Cell>
+                        <Table.Cell className='flex gap-4'>
+                          <ApprovePropertyButton
+                            property={property}
+                          />
 
-                      <PropertyRejectBtn
-                        propertyId={property?._id}
-                      />
+                          <PropertyRejectBtn
+                            propertyId={property?._id}
+                          />
 
-                      <EditPropertyModal
-                        property={property}
-                        route={'/dashboard/admin/all-properties'}
-                      />
+                          <EditPropertyModal
+                            property={property}
+                            route={'/dashboard/admin/all-properties'}
+                          />
 
-                     <DeletePropertyModal
-                        propertyId={property?._id}
-                        route={'/dashboard/admin/all-properties'}
-                     />
-                    </Table.Cell>
-                  </Table.Row>
-                ))
-              }
-            </Table.Body>
-          </Table.Content>
-        </Table.ScrollContainer>
+                        <DeletePropertyModal
+                            propertyId={property?._id}
+                            route={'/dashboard/admin/all-properties'}
+                        />
+                        </Table.Cell>
+                      </Table.Row>
+                    ))
+                  }
+                </Table.Body>
+              </Table.Content>
+            </Table.ScrollContainer>
 
-        <Table.Footer>
-          <Pagination size="sm">
-            <Pagination.Content>
-              <Pagination.Item>
-                <Pagination.Previous
-                  isDisabled={page === 1}
-                >
-                  <Link 
-                    className='flex'
-                    href={`/dashboard/admin/all-properties?page=${page - 1}`}
-                  >
-                    <Pagination.PreviousIcon />
-                    Prev
-                  </Link>
-                </Pagination.Previous>
-              </Pagination.Item>
-              {pages.map((p) => (
-                <Pagination.Item key={p}>
-                  <Link href={`/dashboard/admin/all-properties?page=${p}`}>
-                    <Pagination.Link
-                      className={p === page && 'bg-emerald-600 text-white'} 
-                      isActive={p === page}
+            <Table.Footer>
+              <Pagination size="sm">
+                <Pagination.Content>
+                  <Pagination.Item>
+                    <Pagination.Previous
+                      isDisabled={page === 1}
                     >
-                      {p}
-                    </Pagination.Link>
-                  </Link>
-                </Pagination.Item>
-              ))}
-              <Pagination.Item>
-                <Pagination.Next
-                  isDisabled={page === totalPage}
-                >
-                  <Link
-                    className='flex'
-                    href={`/dashboard/admin/all-properties?page=${page + 1}`}
-                  >
-                    Next
-                    <Pagination.NextIcon />
-                  </Link>
-                </Pagination.Next>
-              </Pagination.Item>
-            </Pagination.Content>
-          </Pagination>
-        </Table.Footer>
-      </Table>
+                      <Link 
+                        className='flex'
+                        href={`/dashboard/admin/all-properties?page=${page - 1}`}
+                      >
+                        <Pagination.PreviousIcon />
+                        Prev
+                      </Link>
+                    </Pagination.Previous>
+                  </Pagination.Item>
+                  {pages.map((p) => (
+                    <Pagination.Item key={p}>
+                      <Link href={`/dashboard/admin/all-properties?page=${p}`}>
+                        <Pagination.Link
+                          className={p === page && 'bg-emerald-600 text-white'} 
+                          isActive={p === page}
+                        >
+                          {p}
+                        </Pagination.Link>
+                      </Link>
+                    </Pagination.Item>
+                  ))}
+                  <Pagination.Item>
+                    <Pagination.Next
+                      isDisabled={page === totalPage}
+                    >
+                      <Link
+                        className='flex'
+                        href={`/dashboard/admin/all-properties?page=${page + 1}`}
+                      >
+                        Next
+                        <Pagination.NextIcon />
+                      </Link>
+                    </Pagination.Next>
+                  </Pagination.Item>
+                </Pagination.Content>
+              </Pagination>
+            </Table.Footer>
+          </Table>
+        ) : (
+          <EmptyState
+            title="No Properties Available"
+            description="There are currently no properties in the system."
+          />
+        )
+      }
     </div>
   );
 };
