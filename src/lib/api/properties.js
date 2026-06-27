@@ -29,3 +29,9 @@ export const filterByPropertyType = async (propertyType) => {
     `/api/properties/filter/type?propertyType=${propertyType}`
   );
 };
+
+export const sortProperties = async (sort) => {
+  return serverFetch(
+    `/api/properties/sort?sort=${sort}`
+  );
+};
