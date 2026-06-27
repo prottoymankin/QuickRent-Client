@@ -1,8 +1,9 @@
 'use client';
 
+import EmptyProperties from "@/components/homepage/EmptyProperties";
 import PropertyCard from "@/components/shared/PropertyCard";
 import { filterByPropertyType, getApprovedProperties, searchProperties, sortProperties } from "@/lib/api/properties";
-import { Label, SearchField, Select, ListBox } from "@heroui/react";
+import { Label, SearchField, Select, ListBox, Spinner } from "@heroui/react";
 import { useEffect, useState } from "react";
 
 const PublicAllPropertiesPage = () => {
@@ -171,16 +172,27 @@ const PublicAllPropertiesPage = () => {
         </Select>
       </div>
 
-      <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-        {
-          properties.map(property => (
-            <PropertyCard
-              key={property._id}
-              property={property}
-            />
-          ))
-        }
-      </section>
+      {
+        isLoading ? (
+          <div 
+            className="min-h-[50vh] flex flex-col items-center justify-center gap-2"
+          >
+            <Spinner size="xl" />
+            <span className="text-xs text-muted">Loading...</span>
+          </div>
+        ) : properties.length > 0 ? (
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {properties.map((property) => (
+              <PropertyCard
+                key={property._id}
+                property={property}
+              />
+            ))}
+          </section>
+        ) : (
+          <EmptyProperties />
+        )
+      }
     </div>
   );
 };
