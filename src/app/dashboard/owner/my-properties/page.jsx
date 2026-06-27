@@ -1,6 +1,7 @@
 import { ViewRejectModal } from "@/components/dashboard/owner/ViewRejectModal";
 import { DeletePropertyModal } from "@/components/dashboard/shared/DeletePropertyModal";
 import { EditPropertyModal } from "@/components/dashboard/shared/EditPropertyModal";
+import EmptyState from "@/components/dashboard/shared/EmptyState";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getOwenerProperties } from "@/lib/api/properties";
 import { getCurrentUser } from "@/lib/session";

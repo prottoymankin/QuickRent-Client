@@ -31,7 +31,7 @@ const MyBookingsPage = async () => {
                 <Table.Body>
                   {
                     bookings.map(b => (
-                      <Table.Row>
+                      <Table.Row key={b?._id}>
                         <Table.Cell>{b?.propertyTitle}</Table.Cell>
                         <Table.Cell>{formatDate(b?.bookingDate)}</Table.Cell>
                         <Table.Cell>৳{b?.propertyAmount}</Table.Cell>

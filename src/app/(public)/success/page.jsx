@@ -48,7 +48,6 @@ export default async function Success({ searchParams }) {
     }
 
     const result = await createBooking(bookingData);
-    console.log(result);
 
     return (
       <section id='success'>

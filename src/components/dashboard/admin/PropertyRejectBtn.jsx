@@ -1,8 +1,8 @@
 "use client";
 
 import { rejectProperty } from "@/lib/actions/properties";
-import {Envelope, Xmark} from "@gravity-ui/icons";
-import {Button, Input, Label, Modal, Surface, TextArea, TextField, toast} from "@heroui/react";
+import { Xmark} from "@gravity-ui/icons";
+import {Button, Modal, Surface, TextArea, toast} from "@heroui/react";
 import { useRouter } from "next/navigation";
 
 export const PropertyRejectBtn = ({ propertyId }) => {

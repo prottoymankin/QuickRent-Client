@@ -6,7 +6,6 @@ import { Table } from "@heroui/react";
 
 const AllUserPage = async () => {
   const users = await getAllUsers();
-  console.log(users);
 
   return (
     <div className='space-y-10'>

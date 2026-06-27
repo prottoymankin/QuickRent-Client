@@ -1,10 +1,11 @@
 import BookingStatusUpdateBtn from "@/components/dashboard/owner/BookingStatusUpdateBtn";
+import EmptyState from "@/components/dashboard/shared/EmptyState";
 import PageHeader from "@/components/dashboard/shared/PageHeader";
 import { getBookingRequestById } from "@/lib/api/bookings";
 import { getCurrentUser } from "@/lib/session";
 import { formatDate } from "@/utils/formatDate";
 import { Check, Xmark } from "@gravity-ui/icons";
-import { Button, Chip, Table } from "@heroui/react";
+import { Chip, Table } from "@heroui/react";
 
 const BookinRequestPage =  async () => {
   const user = await getCurrentUser();

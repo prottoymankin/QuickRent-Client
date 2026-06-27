@@ -72,10 +72,10 @@ const AllPropertiesPage = async ({ searchParams }) => {
                             route={'/dashboard/admin/all-properties'}
                           />
 
-                        <DeletePropertyModal
-                            propertyId={property?._id}
-                            route={'/dashboard/admin/all-properties'}
-                        />
+                          <DeletePropertyModal
+                              propertyId={property?._id}
+                              route={'/dashboard/admin/all-properties'}
+                          />
                         </Table.Cell>
                       </Table.Row>
                     ))

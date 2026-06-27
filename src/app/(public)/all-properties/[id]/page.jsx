@@ -104,48 +104,52 @@ const PropertyDetailsPage = async ({ params }) => {
             </div>
           </div>
         </div>
+        
+        {
+          user?.role === 'Tenant' && (
+            <div 
+              className='border p-6 rounded-2xl sticky top-20 space-y-6 w-full lg:w-auto'
+            >
+              <div>
+                <h3 className="text-lg lg:text-xl">{property?.propertyTitle}</h3>
 
-        <div 
-          className='border p-6 rounded-2xl sticky top-20 space-y-6 w-full lg:w-auto'
-        >
-          <div>
-            <h3 className="text-lg lg:text-xl">{property?.propertyTitle}</h3>
-
-            <p className='flex items-center text-lg'>
-              <TbCurrencyTaka />
-              {property?.rent}/
-              <span className="text-xs">{property?.rentType === 'Monthly' ? 'Month' : property?.rentType === 'Weekly' ? 'Week' : 'Daily'}</span>
-            </p>
-          </div>
-
-          <div className='space-y-2'>
-            <BookingModal
-              property={property}
-              user={user}
-            />
-            
-            <AddFavoriteButton
-              propertyId={id} 
-            />
-          </div>
-
-          <div>
-            {
-              bookingHighlights.map((item, idx) => (
-                <p 
-                  className='flex gap-1 items-center'
-                  key={idx}
-                >
-                  <span className="text-green-400">
-                    <BiCheck/>
-                  </span> 
-
-                  <span className='text-sm'>{item}</span>
+                <p className='flex items-center text-lg'>
+                  <TbCurrencyTaka />
+                  {property?.rent}/
+                  <span className="text-xs">{property?.rentType === 'Monthly' ? 'Month' : property?.rentType === 'Weekly' ? 'Week' : 'Daily'}</span>
                 </p>
-              ))
-            }
-          </div>
-        </div>
+              </div>
+
+              <div className='space-y-2'>
+                <BookingModal
+                  property={property}
+                  user={user}
+                />
+                
+                <AddFavoriteButton
+                  propertyId={id} 
+                />
+              </div>
+
+              <div>
+                {
+                  bookingHighlights.map((item, idx) => (
+                    <p 
+                      className='flex gap-1 items-center'
+                      key={idx}
+                    >
+                      <span className="text-green-400">
+                        <BiCheck/>
+                      </span> 
+
+                      <span className='text-sm'>{item}</span>
+                    </p>
+                  ))
+                }
+              </div>
+            </div>
+          )
+        }
       </div>
       
       <div className='flex flex-col lg:items-start lg:flex-row gap-6'>
@@ -161,7 +165,7 @@ const PropertyDetailsPage = async ({ params }) => {
         {
           reviews.length === 0 ? (
             <div 
-              className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-default-300 bg-content1 px-8 py-16 text-center"
+              className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-default-300 bg-content1 px-8 py-16 text-center w-full"
             >
               <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <FaRegCommentDots size={28} />
