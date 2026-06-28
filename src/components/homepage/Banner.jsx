@@ -2,8 +2,17 @@
 
 import { SearchField, ListBox, Select, NumberField, TextField, Input, Button} from "@heroui/react";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Banner = () => {
+  const router = useRouter();
+
+  const [search, setSearch] = useState("");
+  const [propertyType, setPropertyType] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+
   const propertyTypes = [
     "Apartment",
     "House",
@@ -48,7 +57,12 @@ const Banner = () => {
         >
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="flex flex-col sm:flex-row gap-6">
-              <SearchField name="location" className='w-full'>
+              <SearchField 
+                name="location"
+                className="w-full"
+                value={search}
+                onChange={setSearch}
+              >
                 <SearchField.Group>
                   <SearchField.Input 
                     className="w-full" 
@@ -58,7 +72,12 @@ const Banner = () => {
                 </SearchField.Group>
               </SearchField>
 
-              <Select className="w-full" placeholder="Property Type">
+              <Select 
+                className="w-full"
+                placeholder="Property Type"
+                selectedKey={propertyType}
+                onSelectionChange={setPropertyType}
+              >
                 <Select.Trigger>
                   <Select.Value />
                   <Select.Indicator />
@@ -79,12 +98,24 @@ const Banner = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-6">
-              <TextField name="maxPrice" type="number" className='w-full'>
-                <Input placeholder="Max Price" className='w-full' />
+              <TextField 
+                name="maxPrice" 
+                className="w-full"
+                type="number"
+                defaultValue={maxPrice}
+                onChange={setMaxPrice}
+              >
+                <Input placeholder="Max Price" />
               </TextField>
 
-              <TextField name="maxPrice" type="number" className='w-full'>
-                <Input placeholder="Min Price" className='w-full' />
+              <TextField 
+                name="minPrice" 
+                className="w-full"
+                type="number"
+                defaultValue={minPrice}
+                onChange={setMinPrice}
+              >
+                <Input placeholder="Min Price" />
               </TextField>
             </div>
           </div>
@@ -92,6 +123,27 @@ const Banner = () => {
           <div className="flex justify-center">
             <Button
               className='bg-emerald-600 hover:bg-emerald-700 lg:w-fit rounded-lg w-full'
+              onPress={() => {
+                const params = new URLSearchParams();
+
+                if (search.trim()) {
+                  params.append("search", search);
+                }
+
+                if (propertyType) {
+                  params.append("propertyType", propertyType);
+                }
+
+                if (minPrice) {
+                  params.append("minPrice", minPrice);
+                }
+
+                if (maxPrice) {
+                  params.append("maxPrice", maxPrice);
+                }
+
+                router.push(`/all-properties?${params.toString()}`);
+              }}
             >
               Search
             </Button>
