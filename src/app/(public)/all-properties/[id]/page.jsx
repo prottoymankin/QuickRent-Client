@@ -11,6 +11,27 @@ import { BiCheck } from "react-icons/bi";
 import { FaBed, FaHome, FaMapMarkerAlt, FaRegCommentDots, FaRulerCombined, FaShower } from "react-icons/fa";
 import { TbCurrencyTaka } from "react-icons/tb";
 
+const PropertyInfoCard = ({ icon: Icon, label, value }) => {
+  return (
+    <div className="flex items-center gap-4 rounded-2xl border border-zinc-200 bg-white p-6 transition-all hover:border-emerald-200 hover:shadow-sm">
+      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
+        <Icon className="text-2xl" />
+      </div>
+
+      <div>
+        <p className="text-sm text-zinc-500">
+          {label}
+        </p>
+
+        <h4 className="text-lg font-semibold text-zinc-950">
+          {value}
+        </h4>
+      </div>
+    </div>
+  );
+};
+
+
 const PropertyDetailsPage = async ({ params }) => {
   const { id } = await params;
   const property = await getPropertyById(id);
@@ -37,70 +58,103 @@ const PropertyDetailsPage = async ({ params }) => {
       <div className='flex flex-col lg:flex-row items-start gap-6 relative'>
         <div className='w-full lg:w-auto lg:flex-1 space-y-6'>
           <div 
-            className="flex flex-col sm:flex-row lg:items-center justify-between gap-2"
+            className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"
           >
-            <div className="space-y-2">
-              <h2 className='font-medium text-2xl lg:text-3xl'>
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight text-zinc-950 lg:text-4xl">
                 {property?.propertyTitle}
-              </h2>
+              </h1>
 
-              <p className='flex font-medium items-end text-xl lg:text-2xl'>
-                <span className="flex items-center">
-                  <TbCurrencyTaka />  
+              <div className="mt-3 flex items-end gap-1">
+                <span className="flex items-center text-3xl font-bold text-emerald-600 lg:text-4xl">
+                  <TbCurrencyTaka className="text-3xl" />
                   {property?.rent}
                 </span>
-                /
-                <span className="text-sm">{property?.rentType === 'Monthly' ? 'Month' : property?.rentType === 'Weekly' ? 'Week' : 'Daily'}</span>
+
+                <span className="pb-1 text-base text-zinc-500">
+                  /
+                  {property?.rentType === "Monthly"
+                    ? "Month"
+                    : property?.rentType === "Weekly"
+                    ? "Week"
+                    : "Day"}
+                </span>
+              </div>
+            </div>
+
+            <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-600">
+              <FaMapMarkerAlt className="text-emerald-600" />
+              <span>{property?.location}</span>
+            </div>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            <PropertyInfoCard
+              icon={FaHome}
+              label="Property Type"
+              value={property?.propertyType}
+            />
+
+            <PropertyInfoCard
+              icon={FaRulerCombined}
+              label="Property Size"
+              value={`${property?.propertySize} sqft`}
+            />
+
+            <PropertyInfoCard
+              icon={FaBed}
+              label="Bedrooms"
+              value={property?.bedrooms}
+            />
+
+            <PropertyInfoCard
+              icon={FaShower}
+              label="Bathrooms"
+              value={property?.bathrooms}
+            />
+          </div>
+
+          <div className="space-y-6">
+            {/* Description */}
+            <div className="rounded-2xl border border-zinc-200 bg-white p-6">
+              <h3 className="mb-3 text-xl font-semibold text-zinc-950">
+                Description
+              </h3>
+
+              <p className="leading-7 text-zinc-600">
+                {property?.description}
               </p>
             </div>
-            
-            <p className='flex items-center text-sm'>
-              <FaMapMarkerAlt />
-              {property?.location}
-            </p>
-          </div>
 
-          <div className='gap-6 grid sm:grid-cols-2 text-lg'>
-            <div className='border p-6 rounded-xl  space-y-2'>
-              <FaHome className="text-3xl" />
-              {property?.propertyType}
+            {/* Extra Features */}
+            <div className="rounded-2xl border border-zinc-200 bg-white p-6">
+              <h3 className="mb-3 text-xl font-semibold text-zinc-950">
+                Extra Features
+              </h3>
+
+              <p className="leading-7 text-zinc-600">
+                {property?.extraFeatures}
+              </p>
             </div>
 
-            <div className='border p-6 rounded-xl space-y-2'>
-              <FaRulerCombined className="text-3xl" />
-              {property?.propertySize} sqft
-            </div>
+            {/* Amenities */}
+            <div className="rounded-2xl border border-zinc-200 bg-white p-6">
+              <h3 className="mb-4 text-xl font-semibold text-zinc-950">
+                Amenities
+              </h3>
 
-            <div className='border p-6 rounded-xl space-y-2'>
-              <FaBed className="text-3xl" />
-              {property?.bedrooms} Bedrooms
-            </div>
-
-            <div className='border p-6 rounded-xl space-y-2'>
-              <FaShower className="text-3xl" />
-              {property?.bathrooms} Bathrooms
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-medium text-lg">Description:</h4>
-            <p>{property?.description}</p>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-medium text-lg">Extra Features:</h4>
-            <p>{property?.extraFeatures}</p>
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="font-medium text-lg">Amenities:</h4>
-
-            <div className='flex flex-wrap gap-2'>
-              {
-                property?.amenities.map((item, idx) => (
-                  <Chip key={idx}>{item}</Chip>
-                ))
-              }
+              <div className="flex flex-wrap gap-3">
+                {property?.amenities.map((item, idx) => (
+                  <Chip
+                    key={idx}
+                    color="success"
+                    variant="flat"
+                    className="rounded-lg px-2"
+                  >
+                    {item}
+                  </Chip>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -164,18 +218,20 @@ const PropertyDetailsPage = async ({ params }) => {
 
         {
           reviews.length === 0 ? (
-            <div 
-              className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-default-300 bg-content1 px-8 py-16 text-center w-full"
+            <div
+              className={`flex flex-col items-center justify-center rounded-2xl border border-zinc-200 bg-white px-8 py-16 text-center shadow-sm ${
+                user?.role !== "Tenant" && "w-full"
+              }`}
             >
-              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-                <FaRegCommentDots size={28} />
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                <FaRegCommentDots className="text-4xl" />
               </div>
 
-              <h3 className="text-2xl font-semibold">
+              <h3 className="text-2xl font-bold text-zinc-950">
                 No Reviews Yet
               </h3>
 
-              <p className="mt-3 max-w-md text-default-500">
+              <p className="mt-3 max-w-md leading-7 text-zinc-500">
                 This property hasn't received any reviews yet. Be the first tenant to
                 share your experience and help others make informed decisions.
               </p>

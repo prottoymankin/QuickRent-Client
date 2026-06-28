@@ -4,7 +4,7 @@ import { updateBookingStatus } from "@/lib/actions/bookings";
 import { Button, toast } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
-const BookingStatusUpdateBtn = ({ icon, status, variant, id }) => {
+const BookingStatusUpdateBtn = ({ icon, status, id }) => {
   const router = useRouter();
 
   const handleChangeBookingStatus = async () => {
@@ -20,9 +20,9 @@ const BookingStatusUpdateBtn = ({ icon, status, variant, id }) => {
 
   return (
     <Button
+      className={status === 'Approved' ? 'bg-emerald-100 text-emerald-600' : 'bg-red-100 text-red-500'}
       isIconOnly
       onClick={handleChangeBookingStatus}
-      variant={variant}
     >
       {icon}
     </Button>

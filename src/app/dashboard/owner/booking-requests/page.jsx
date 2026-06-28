@@ -62,14 +62,12 @@ const BookinRequestPage =  async () => {
                           <BookingStatusUpdateBtn
                             icon={<Check />}
                             status={'Approved'}
-                            variant={'primary'}
                             id={req?._id}
                           />
 
                           <BookingStatusUpdateBtn
                             icon={<Xmark />}
                             status={'Reject'}
-                            variant={'danger'}
                             id={req?._id}
                           />
                         </Table.Cell>

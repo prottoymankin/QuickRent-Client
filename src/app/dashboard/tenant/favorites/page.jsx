@@ -40,7 +40,10 @@ const FavoritesPage = async () => {
                         <Table.Cell>{property?.propertyType}</Table.Cell>
                         <Table.Cell className='flex gap-4'>
                           <Link href={`/all-properties/${property?._id}`}>
-                            <Button isIconOnly>
+                            <Button
+                              className='bg-emerald-100 text-emerald-600'
+                              isIconOnly
+                            >
                               <FaEye />
                             </Button>
                           </Link>

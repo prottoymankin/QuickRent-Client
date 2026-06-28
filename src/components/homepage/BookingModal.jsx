@@ -5,7 +5,7 @@ import {Button, DateField, Input, Label, Modal, Surface, TextField} from "@herou
 export function BookingModal({ property, user }) {
   return (
     <Modal>
-      <Button className='rounded-lg w-full'>
+      <Button className='bg-emerald-600 hover:bg-emerald-700 rounded-lg w-full'>
         Book Property
       </Button>
 

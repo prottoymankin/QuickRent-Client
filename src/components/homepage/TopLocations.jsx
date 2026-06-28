@@ -43,7 +43,7 @@ export default function TopLocations() {
             Explore Top <span className="text-primary">Locations</span>
           </h2>
 
-          <p className="mt-4 text-default-500">
+          <p className="mt-4 text-zinc-500">
             Find rental properties in Bangladesh's most popular cities.
           </p>
         </div>

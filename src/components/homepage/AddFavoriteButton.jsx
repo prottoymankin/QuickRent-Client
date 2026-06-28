@@ -26,9 +26,9 @@ const AddFavoriteButton = ({ propertyId }) => {
 
   return (
     <Button
-      className='rounded-lg w-full'
+      className="border-emerald-600 rounded-lg text-emerald-600 hover:bg-emerald-50 w-full"
       onClick={handleAddToFavorites}
-      variant="tertiary"
+      variant="outline"
     >
       <FaRegHeart />
       Add to favorites

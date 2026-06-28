@@ -159,7 +159,7 @@ const AddPropertyForm = ({ user }) => {
 
         <div className='flex gap-6 justify-end'>
           <Button
-            className='rounded-lg'
+            className='bg-emerald-600 hover:bg-emerald-700 rounded-lg'
             type='submit'
           >
             <Plus />
@@ -167,7 +167,7 @@ const AddPropertyForm = ({ user }) => {
           </Button>
 
           <Button
-            className='rounded-lg'
+            className="border border-emerald-600 rounded-lg text-emerald-600 hover:bg-emerald-50 bg-transparent"
             type='reset'
             variant='tertiary'
           >

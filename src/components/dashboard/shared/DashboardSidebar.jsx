@@ -39,18 +39,34 @@ export async function DashboardSidebar () {
   const navItems = userRole[user?.role];
 
   const navContent = (
-    <nav className="flex flex-col gap-1">
+    <nav className="space-y-2">
       {navItems.map((item) => (
-        <Link 
-          href={item.href}
-          key={item.label}
-        >
+        <Link key={item.label} href={item.href}>
           <button
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default w-full"
-            type="button"
+            className="
+              group flex w-full items-center gap-3
+              rounded-2xl border border-transparent
+              px-4 py-3
+              text-sm font-medium text-zinc-700
+              transition-all duration-200
+              hover:border-emerald-100
+              hover:bg-emerald-50
+              hover:text-emerald-600
+              hover:shadow-sm
+            "
           >
-            <item.icon className="size-5 text-muted" />
-            {item.label}
+            <div
+              className="
+                flex h-10 w-10 items-center justify-center
+                rounded-xl bg-zinc-100
+                transition-all duration-200
+                group-hover:bg-emerald-100
+              "
+            >
+              <item.icon className="size-5 text-zinc-500 group-hover:text-emerald-600" />
+            </div>
+
+            <span>{item.label}</span>
           </button>
         </Link>
       ))}
@@ -59,16 +75,23 @@ export async function DashboardSidebar () {
 
   return (
     <>
-      <aside className="border-r shrink-0 w-60 hidden md:block p-5">
+      <aside className="border-r shrink-0 w-70 hidden md:block p-5">
+        <Link href='/'>
+          <Button 
+            className='bg-emerald-600 hover:bg-emerald-700 mb-6 rounded-lg w-full'
+          >
+            Back to Homepage
+          </Button>
+        </Link>
+
         {navContent}
       </aside>
 
       <div className="block md:hidden">
         <Drawer>
           <Button 
+            className='ml-5 mt-5 bg-emerald-600 text-white'
             isIconOnly
-            variant="tertiary"
-            className='ml-5 mt-5'
           >
             <GoSidebarCollapse />
           </Button>
@@ -81,6 +104,14 @@ export async function DashboardSidebar () {
                 </Drawer.Header>
                 <Drawer.Body>
                   {navContent}
+
+                  <Link href='/'>
+                    <Button 
+                      className='bg-emerald-600 hover:bg-emerald-700 mt-6 rounded-lg w-full'
+                    >
+                      Back to Homepage
+                    </Button>
+                  </Link>
                 </Drawer.Body>
               </Drawer.Dialog>
             </Drawer.Content>
@@ -88,6 +119,5 @@ export async function DashboardSidebar () {
         </Drawer>
       </div>
     </>
-
   );
 }

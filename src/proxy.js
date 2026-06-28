@@ -13,6 +13,6 @@ export async function proxy(request) {
 export const config = {
   matcher: [
     '/dashboard/admin/:path*',
-    "/all-properties/:path*",
+    "/all-properties/:path",
   ]
 }

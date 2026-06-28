@@ -30,9 +30,9 @@ export const PropertyRejectBtn = ({ propertyId }) => {
 
   return (
     <Modal>
-      <Button 
+      <Button
+        className='bg-red-100 text-red-500'
         isIconOnly
-        variant="danger"
       >
         <Xmark />
       </Button>

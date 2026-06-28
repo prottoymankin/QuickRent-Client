@@ -24,7 +24,7 @@ const ApprovePropertyButton = ({ property }) => {
 
   return (
     <Button 
-      className='text-green-500'
+      className='bg-emerald-100 text-emerald-600'
       isIconOnly
       onClick={onClick}
       variant="secondary"

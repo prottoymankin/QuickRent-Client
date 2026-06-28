@@ -31,7 +31,7 @@ const PropertyCard = ({ property }) => {
         </div>
 
         <div>
-          <p className='flex gap-1 items-center text-sm'>
+          <p className='flex gap-1 items-center line-clamp-1 text-sm'>
             <FaMapMarkerAlt />
             {property?.location}
           </p>
@@ -49,7 +49,7 @@ const PropertyCard = ({ property }) => {
 
         <Link href={`/all-properties/${property?._id}`}>
           <Button
-            className='rounded-lg'
+            className="rounded-lg bg-emerald-600 font-medium text-white transition hover:bg-emerald-700 w-full"
           >
             View Property Details
           </Button>

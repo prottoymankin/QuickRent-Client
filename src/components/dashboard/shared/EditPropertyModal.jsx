@@ -38,13 +38,16 @@ export function EditPropertyModal({ property, route }) {
 
   return (
     <Modal>
-      <Button isIconOnly variant="secondary">
+      <Button
+        className='bg-emerald-100 text-emerald-600'
+        isIconOnly 
+      >
         <Pencil />
       </Button>
 
       <Modal.Backdrop>
         <Modal.Container placement="auto">
-          <Modal.Dialog className="sm:max-w-md">
+          <Modal.Dialog className="sm:max-w-lg">
             <Modal.CloseTrigger />
             <Modal.Body className="p-6">
               <Surface variant="default">
@@ -165,14 +168,16 @@ export function EditPropertyModal({ property, route }) {
                   </div>
 
                   <Modal.Footer>
-                    <Button 
+                    <Button
+                      className='border-emerald-600 rounded-lg text-emerald-600 hover:bg-emerald-50'
                       slot="close" 
-                      variant="secondary"
+                      variant="outline"
                     >
                       Cancel
                     </Button>
 
-                    <Button 
+                    <Button
+                      className='bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg'
                       slot="close"
                       type='submit'
                     >

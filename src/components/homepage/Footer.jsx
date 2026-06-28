@@ -7,11 +7,10 @@ export const Footer = () => {
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left Side */}
           <div className="max-w-md">
-            <Link
-              href="/"
-              className="text-3xl font-extrabold tracking-tight text-primary"
-            >
-              QuickRent
+            <Link href="/" className="block hover:no-underline">
+              <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950">
+                Quick<span className="text-emerald-600">Rent</span>
+              </h1>
             </Link>
 
             <p className="mt-5 leading-7 text-default-500">

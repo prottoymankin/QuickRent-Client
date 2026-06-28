@@ -20,8 +20,8 @@ export function DeletePropertyModal({ propertyId, route }) {
   return (
     <AlertDialog>
       <Button
+        className='bg-red-100 text-red-500'
         isIconOnly
-        variant="danger"
       >
         <TrashBin />
       </Button>
@@ -41,10 +41,11 @@ export function DeletePropertyModal({ propertyId, route }) {
               </p>
             </AlertDialog.Body>
             <AlertDialog.Footer>
-              <Button slot="close" variant="tertiary">
+              <Button className='rounded-lg' slot="close" variant="tertiary">
                 Cancel
               </Button>
               <Button
+                className='rounded-lg'
                 onClick={handleDeleteProperty} 
                 variant="danger"
               >

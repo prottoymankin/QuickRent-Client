@@ -11,7 +11,7 @@ const FeaturedProperties = async () => {
           Featured Properties
         </h2>
 
-        <p className="mt-4 text-default-500">Discover our top-rated rental properties, offering the perfect blend of comfort, location, and value.</p>
+        <p className="mt-4 text-zinc-500">Discover our top-rated rental properties, offering the perfect blend of comfort, location, and value.</p>
       </header>
 
       <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

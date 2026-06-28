@@ -22,9 +22,9 @@ const FabPropertyDeleteBtn = ({userId, propertyId}) => {
   
   return (
     <Button 
+      className='bg-red-100 text-red-500'
       isIconOnly
       onClick={handleDeleteFavoriteProperty} 
-      variant="danger"
     >
       <FaTrashAlt />
     </Button>
