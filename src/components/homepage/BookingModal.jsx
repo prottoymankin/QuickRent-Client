@@ -77,15 +77,15 @@ export function BookingModal({ property, user }) {
 
                   <Modal.Footer>
                     <Button 
-                      className='rounded-lg'
+                      className='rounded-lg hover:bg-emerald-100 border border-emerald-600 text-emerald-600'
                       slot="close" 
-                      variant="tertiary"
+                      variant="outline"
                     >
                       Cancel
                     </Button>
 
                     <Button 
-                      className='rounded-lg'
+                      className='rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white'
                       type='submit'
                     >
                       Confirm Booking

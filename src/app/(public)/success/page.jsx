@@ -92,15 +92,15 @@ export default async function Success({ searchParams }) {
 
             <div className='flex items-center sm:flex-row justify-center gap-4'>
               <Link href={'/dashboard/tenant/my-bookings'}>
-                <Button className='rounded-lg'>
+                <Button className='rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white'>
                   View Booking
                 </Button>
               </Link>
 
               <Link href='/all-properties'>
                 <Button
-                  className='rounded-lg'
-                  variant='tertiary'
+                  className='border border-emerald-600 hover:bg-emerald-100 text-emerald-600 rounded-lg'
+                  variant='outline'
                 >
                   Back to Properties
                 </Button>
