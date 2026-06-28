@@ -14,8 +14,6 @@ const Navbar = () => {
 
   const { data } = authClient.useSession();
   const user = data?.user;
-
-  console.log(user);
   
   const handleLogout = async () => {
     await authClient.signOut({
@@ -178,7 +176,7 @@ const Navbar = () => {
                       <Dropdown.Item className="hover:bg-emerald-50">
                         <Link 
                           className='w-full'
-                          href="/Dashboard"
+                          href={dashboardPath}
                         >
                           <Label>Dashboard</Label>
                         </Link>

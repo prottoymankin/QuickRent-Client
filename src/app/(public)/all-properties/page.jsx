@@ -4,15 +4,10 @@ import EmptyProperties from "@/components/homepage/EmptyProperties";
 import PropertyCard from "@/components/shared/PropertyCard";
 import { filterByPropertyType, getApprovedProperties, searchProperties, sortProperties } from "@/lib/api/properties";
 import { Label, SearchField, Select, ListBox, Spinner, Pagination } from "@heroui/react";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const PublicAllPropertiesPage = () => {
-  const searchParams = useSearchParams();
-
-  const [currentPage, setCurrentPage] = useState(
-    Number(searchParams.get("page")) || 1
-  );
+  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [properties, setProperties] = useState([]);
   const [propertyType, setPropertyType] = useState("");

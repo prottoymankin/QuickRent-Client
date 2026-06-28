@@ -10,9 +10,6 @@ const FabPropertyDeleteBtn = ({userId, propertyId}) => {
 
   const handleDeleteFavoriteProperty = async () => {
     const result = await removeFavoriteProperty(userId, propertyId);
-    console.log(userId, propertyId)
-
-    console.log(result)
 
     if (result.acknowledged) {
       toast.success('Property removed from your list successfully.');

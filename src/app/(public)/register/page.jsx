@@ -28,7 +28,7 @@ const RegisterPage = () => {
         router.push('/login');
       },
       onError: (ctx) => {
-        console.log(ctx.error.message);
+        toast.danger(ctx.error.message);
       }
     });
   }

@@ -1,6 +1,5 @@
 import { getFeaturedProperties } from "@/lib/api/properties";
 import PropertyCard from "../shared/PropertyCard";
-import { motion } from "motion/react";
 import AnimatedGrid from "./AnimateGrid";
 
 const FeaturedProperties = async () => {
