@@ -1,5 +1,7 @@
 import { getFeaturedProperties } from "@/lib/api/properties";
 import PropertyCard from "../shared/PropertyCard";
+import { motion } from "motion/react";
+import AnimatedGrid from "./AnimateGrid";
 
 const FeaturedProperties = async () => {
   const featuredProperties = await getFeaturedProperties();
@@ -14,7 +16,7 @@ const FeaturedProperties = async () => {
         <p className="mt-4 text-zinc-500">Discover our top-rated rental properties, offering the perfect blend of comfort, location, and value.</p>
       </header>
 
-      <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <AnimatedGrid>
         {
           featuredProperties.map(property => (
             <PropertyCard
@@ -23,7 +25,7 @@ const FeaturedProperties = async () => {
             />
           ))
         }
-      </div>
+      </AnimatedGrid>
     </div>
   );
 };

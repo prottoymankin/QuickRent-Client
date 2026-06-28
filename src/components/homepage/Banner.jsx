@@ -1,4 +1,7 @@
-import {Label, SearchField, ListBox, Select, NumberField, TextField, Input, Button} from "@heroui/react";
+"use client";
+
+import { SearchField, ListBox, Select, NumberField, TextField, Input, Button} from "@heroui/react";
+import { motion } from "motion/react";
 
 const Banner = () => {
   const propertyTypes = [
@@ -17,7 +20,10 @@ const Banner = () => {
         <div className="absolute bg-black/60 inset h-full w-full">
         </div>
 
-        <div 
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           className="leading-[1.1] relative space-y-4 text-center text-zinc-50 z-10"
         >
           <h1 
@@ -29,9 +35,15 @@ const Banner = () => {
           <p className="leading-[1.1] max-w-lg mx-auto">
             QuickRent connects tenants and property owners through a secure marketplace, making property discovery, booking, and management simple and hassle-free.
           </p>
-        </div>
+        </motion.div>
 
-        <div 
+        <motion.div
+           initial={{ opacity: 0, y: 60, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{
+            duration: 0.8,
+            delay: 0.3,
+          }}
           className="bg-white/10 backdrop-blur-xs flex flex-col lg:flex-row gap-6 p-6 rounded-xl"
         >
           <div className="flex flex-col lg:flex-row gap-6">
@@ -84,7 +96,7 @@ const Banner = () => {
               Search
             </Button>
           </div>
-        </div>
+        </motion.div>
 
 
       </div>
