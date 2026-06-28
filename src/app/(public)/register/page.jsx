@@ -4,8 +4,8 @@ import Link from "next/link";
 import {Button, Description, FieldError, Form, Input, Label, Separator, TextField, toast} from "@heroui/react";
 import { SelectField } from "@/components/shared/SelectField";
 import { authClient } from "@/lib/auth-client";
-import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
+import GoogleLoginBtn from "@/components/shared/GoogleLoginBtn";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -153,10 +153,7 @@ const RegisterPage = () => {
         <Separator className="my-4" />
 
         <div className="flex justify-center">
-          <Button variant="tertiary">
-            <FcGoogle />
-            Continue with Google
-          </Button>
+          <GoogleLoginBtn />
         </div>
       </section>
     </div>
